@@ -1,0 +1,96 @@
+@font-face {
+    font-family: "Estedad-Regular";
+    src: url("./assets/fonts/Estedad-Regular.woff2") format("woff2");
+}
+
+@font-face {
+    font-family: "Estedad-Medium";
+    src: url("./assets/fonts/Estedad-Medium.woff2") format("woff2");
+}
+
+* {
+    line-height: 150%;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+.title1,
+.title2,
+.sub-headline,
+.headline,
+.callout,
+.button2,
+.body,
+.caption {
+    font-family: "Estedad-Regular", sans-serif;
+}
+
+.title1 {
+    font-size: 28px;
+}
+
+.title2 {
+    font-size: 24px;
+}
+
+h1 {
+    font-size: 44px;
+}
+
+h2 {
+    font-size: 40px;
+}
+
+h3 {
+    font-size: 32px;
+}
+
+h4 {
+    font-size: 24px;
+}
+
+h5 {
+    font-size: 20px;
+}
+
+h6 {
+    font-size: 16px;
+}
+
+.sub-headline {
+    font-size: 18px;
+}
+
+.headline {
+    font-size: 20px;
+}
+
+.callout {
+    font-size: 14px;
+}
+
+.button {
+    font-family: "Estedad-Medium", sans-serif;
+    font-size: 18px;
+}
+
+.button2 {
+    font-size: 16px;
+}
+
+.caption {
+    font-size: 14px;
+}
+
+.body {
+    font-size: 16px;
+}
+
+.body-em {
+    font-family: "Estedad-Medium", sans-serif;
+    font-size: 16px;
+}
