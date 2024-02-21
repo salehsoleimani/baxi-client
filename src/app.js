@@ -1,3 +1,13 @@
+// App.jsx
+import React, {Fragment} from 'react';
+import Button from "./components/ui/Button";
+import Input from "./components/ui/Input";
+
 export default function App() {
-    return <h1>CSS Styles Included فونت استعداد</h1>
+    return (
+        <Fragment>
+            <Input placeholder="نام خانوادگی"/>
+            <Button>ادامه</Button>
+        </Fragment>
+    );
 }

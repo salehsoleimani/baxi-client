@@ -1,28 +1,30 @@
 @import url("./fonts.css");
 
 :root {
-    /* primary */
     --color-primary: #FF7A28;
     --color-primary-dark: #210D00;
-    --color-primary-light: #FFE1CF;
+    --color-primary-light: #B7E4FF;
+    --color-primary-lighter: #FFF0E7;
 
-    /* secondary */
     --color-secondary: #28ADFF;
     --color-secondary-dark: #001421;
-    --color-secondary-light: #CFEDFF;
+    --color-secondary-light: #FFD3B7;
+    --color-secondary-lighter: #E7F6FF;
 
-    /* text */
     --color-title: #1A1A1A;
     --color-sub-title: #4E4E4E;
+    --color-text-disabled: #B0B0B0;
 
-    /* other */
+
     --color-error: #f84263;
     --color-success: #28a745;
     --color-success-background: #eafaee;
     --color-border: #E5E5E5;
     --color-surface: #ffffff;
+    --color-deactive: #f6f6f6;
     --color-gray-70: #4E4E4E;
     --color-gray-40: #999999;
+    --color-gray-light: #EFEFEF;
 
     --border-radius-1: 16px;
     --border-radius-2: 32px;
