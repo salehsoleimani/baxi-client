@@ -1,13 +1,14 @@
 .input {
     outline: none;
-    border: 1px solid var(--color-border);
-    border-radius: var(--border-radius-2);
+    border: 1px solid var(--color-tertiary-light-active);
+    border-radius: var(--border-radius-1);
     padding: 16px 24px;
-    color: var(--color-title);
+    color: var(--color-tertiary-darker);
 }
 
 .input:global(.error) {
-    border-color: var(--color-error);
+    border-color: var(--color-error-normal);
+    background-color: var(--color-error-light);
 }
 
 .input:global(.system) {
@@ -16,13 +17,14 @@
 }
 
 .input::placeholder {
-    color: var(--color-gray-40);
+    color: var(--color-tertiary-normal);
 }
 
 .input:focus {
-    border: 2px solid var(--color-secondary);
+    border: 2px solid var(--color-secondary-normal-active);
 }
 
 .input:disabled {
-    color: var(--color-deactive);
+    border: 1px solid var(--color-tertiary-white-light-active);
+    color: var(--color-tertiary-lighter);
 }
