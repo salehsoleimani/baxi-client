@@ -1,0 +1,16 @@
+.container {
+    padding-top: 72px !important;
+}
+
+.loginBox {
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+    width: fit-content;
+}
+
+.container, .loginBox {
+    width: 100%;
+}

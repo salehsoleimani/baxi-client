@@ -10,7 +10,9 @@ const Button = ({
                 }) => {
     const clickHandler = (e) => {
         e.stopPropagation();
-        onClick();
+        e.target.blur();
+        // e.preventDefault()
+        // onClick();
     };
 
     const textSize = callout ? "button2" : "button";
