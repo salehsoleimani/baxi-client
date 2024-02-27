@@ -19,7 +19,7 @@ const LoginOtpForm = ({phoneNumber}) => {
 
     // send otp to user phone
     const sendOtp = useCallback(async () => {
-        await fetch(`${BASE_URL}api/auth/otp`,
+        await fetch(`${BASE_URL}api/auth/otp/`,
             {
                 method: 'POST',
                 headers: {
@@ -71,7 +71,6 @@ const LoginOtpForm = ({phoneNumber}) => {
                     });
                     if (!res.ok) throw new Error("");
                     const cookies = res.headers.get('Set-Cookie');
-                    print(cookies)
                     localStorage.setItem("baxi-access", cookies.get("Access-Token"));
                     localStorage.setItem("baxi-refresh", cookies.get("Refresh-Token"));
                     navigate("/my-account");

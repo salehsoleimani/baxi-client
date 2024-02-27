@@ -1,83 +1,74 @@
-// hooks
-import { useEffect, useState } from "react";
-import useUrl from "../../hooks/useUrl";
-
-// styles
-import styles from "./LoginForm.module.css";
-import Button from "../ui/Button";
+import {useState} from "react";
 import Input from "../ui/Input";
-import {useNavigate, useOutletContext} from "react-router-dom";
+import Button from "../ui/Button";
 import ErrorMessage from "../ui/ErrorMessage";
+import {useNavigate, useOutletContext} from "react-router-dom";
+import {useAuth} from "../../context/AuthProvider";
+import useUrl from "../../hooks/useUrl";
+import styles from "./LoginForm.module.css"
+import arrowRight from "../../assets/icons/arrow-right.svg"
 
-// logo and icons
-// import mobileIcon from "../../assets/icons/mobile.svg";
+const LoginForm = () => {
+    const {isLoading, setIsLoading} = useOutletContext();
 
-// components
-// import Input from "../UI/Input";
-// import Button from "../UI/Button";
-// import ErrorMessage from "../UI/ErrorMessage";
-// import { useNavigate, useOutletContext } from "react-router-dom";
+    const [phoneNumber, setPhoneNumber] = useState("");
+    const [hasError, setHasError] = useState(false);
+    const navigate = useNavigate();
 
-const LoginForm = ({ phoneNumber, setPhoneNumber }) => {
-	const { isLoading, setIsLoading } = useOutletContext();
+    const inputChangeHandler = (e) => {
+        setPhoneNumber(e.target.value);
+        setHasError(false);
+    };
 
-	const BASE_URL = useUrl();
-	const [hasError, setHasError] = useState(false);
-	const navigate = useNavigate();
+    const phoneValidate = () => {
+        if (phoneNumber.length < 10 || phoneNumber.length > 13) {
+            setHasError(true);
+            return false;
+        } else {
+            return true;
+        }
+    };
 
-	const inputChangeHandler = (e) => {
-		setPhoneNumber(e.target.value);
-	};
-	const phoneValidate = () => {
-		if (phoneNumber.length < 10 || phoneNumber.length > 13) {
-			setHasError(true);
-			return false;
-		} else {
-			return true;
-		}
-	};
+    const submitHandler = (e) => {
+        setIsLoading(true);
+        e.preventDefault();
+        setHasError(false);
+        if (!phoneValidate()) return;
+        navigate("./otp");
+        setIsLoading(false);
+    };
 
-	useEffect(() => {
-		setPhoneNumber("");
-	}, [setPhoneNumber]);
+    return (
+        <form className={styles.loginForm} onSubmit={submitHandler}>
+            <h5 className="title2">ورود</h5>
+            <p className={`${styles.subHeadline} sub-headline`}>شماره موبایلت رو بزن تا یه کد برات بفرستیم</p>
+            <div className={styles.inputField}>
+                <Input
+                    type="text"
+                    value={phoneNumber}
+                    onChange={inputChangeHandler}
+                    placeholder="شماره موبایل"
+                    id="phone-number"
+                    className={hasError ? `error` : styles.input}
+                />
+                {hasError && (
+                    <ErrorMessage>شماره وارد شده نامعتبر است</ErrorMessage>
+                )}
+            </div>
+            <span
+                hidden={hasError}
+                className={`${styles.caption} caption`}
+            >کد تائید رو به این شماره پیامک می‌کنیم</span>
 
-	const submitHandler = (e) => {
-		e.preventDefault(); // stop page refresh
-		setHasError(false);
-		if (!phoneValidate()) return;
-		const userPhone = {
-			phone_number: phoneNumber,
-		};
-	};
-
-	return (
-		<form className={styles.loginForm} onSubmit={submitHandler}>
-			<label className="caption-lg" htmlFor="phone-number">
-				شماره موبایل
-			</label>
-			<div className={styles.inputField}>
-				{/*<img*/}
-				{/*	src={mobileIcon}*/}
-				{/*	className={styles.mobileIcon}*/}
-				{/*	alt="mobile icon"*/}
-				{/*/>*/}
-				<Input
-					type="text"
-					value={phoneNumber}
-					onChange={inputChangeHandler}
-					placeholder="شماره موبایل خود را وارد کنید"
-					id="phone-number"
-				/>
-				{hasError && (
-					<ErrorMessage>شماره وارد شده نامعتبر است</ErrorMessage>
-				)}
-			</div>
-
-			<Button isSmall={true} type="primary">
-				ورود به حساب کاربری
-			</Button>
-		</form>
-	);
+            <Button type="filled">
+                <img
+                    src={arrowRight}
+                    alt="arrow icon"
+                />
+                <span className="button">ادامه</span>
+            </Button>
+        </form>
+    );
 };
 
 export default LoginForm;

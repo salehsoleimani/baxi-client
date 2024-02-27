@@ -1,27 +1,32 @@
 .loginForm {
-	display: flex;
-	flex-direction: column;
-	align-items: stretch;
-}
-.loginForm label {
-	margin-bottom: 8px;
-	margin-right: 16px;
-	color: var(--color-primary-dark);
-}
-.loginForm .inputField {
-	margin-bottom: 24px;
-	width: 100%;
-	position: relative;
-	display: flex;
-	flex-direction: column;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    justify-content: flex-start;
+    width: 100%;
+    height: 100vh;
+    padding: 72px 24px 24px 24px;
 }
 
-.inputField .mobileIcon {
-	position: absolute;
-	margin: 16px;
+.subHeadline {
+    margin-bottom: 24px;
+    color: var(--color-tertiary-dark);
 }
+
+.inputField {
+    margin-bottom: 8px;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+}
+
 .inputField input {
-	width: 100%;
-	padding-right: 56px;
+    width: 100%;
+    padding-right: 16px;
 }
 
+.loginForm Button {
+    margin-top: auto;
+    border-radius: var(--border-radius-2);
+    align-self: flex-start;
+}

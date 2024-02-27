@@ -1,11 +1,11 @@
-const BASE_URL = "https://localhost:3000/";
+const BASE_URL = "http://127.0.0.1:4000/api/auth/";
 
 const getAccess = async (setToken) => {
     const refreshToken = localStorage.getItem("Refresh-Token");
     const reqBody = {
         refresh: refreshToken,
     };
-    const res = await fetch(`${BASE_URL}api/auth/refresh/`, {
+    const res = await fetch(`${BASE_URL}me/`, {
         method: "POST", headers: {
             "content-type": "application/json", "Cookie": document.cookie
 
