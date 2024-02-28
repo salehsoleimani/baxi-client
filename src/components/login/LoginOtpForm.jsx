@@ -1,10 +1,14 @@
 import {useCallback, useEffect, useState} from "react";
-import styles from "./LoginOtpForm.module.css";
+import styles from "./LoginForm.module.css";
 import OTPInput from "react-otp-input";
 import Button from "../ui/Button";
 import ErrorMessage from "../ui/ErrorMessage";
 import {useNavigate, useOutletContext} from "react-router-dom";
 import useUrl from "../../hooks/useUrl";
+import smsIcon from "../../assets/glass-icons/Chat.png"
+import arrowLeftIcon from "../../assets/icons/arrow-left.svg"
+import inputStyles from "../../components/ui/Input.module.css"
+import Input from "../ui/Input";
 
 const WAITING_TIME = 120;
 const OTP_LENGTH = 4;
@@ -16,6 +20,11 @@ const LoginOtpForm = ({phoneNumber}) => {
     const [hasError, setHasError] = useState(false);
     const [remainingTime, setRemainingTime] = useState(WAITING_TIME);
     const navigate = useNavigate();
+
+    const remainingSeconds = remainingTime.toString(10);
+    let hours = Math.floor(remainingSeconds / 3600);
+    let minutes = Math.floor((remainingSeconds - (hours * 3600)) / 60)
+    let seconds = remainingSeconds - (hours * 3600) - (minutes * 60);
 
     // send otp to user phone
     const sendOtp = useCallback(async () => {
@@ -49,6 +58,10 @@ const LoginOtpForm = ({phoneNumber}) => {
     useEffect(() => {
         sendOtp();
     }, [sendOtp]);
+
+    const backBtnHandler = () => {
+        navigate(-1);
+    };
 
     const otpChangeHandler = (value) => {
         setOtp(value);
@@ -92,17 +105,29 @@ const LoginOtpForm = ({phoneNumber}) => {
     };
 
     return (
-        <div className={styles.otpForm}>
-            <p className="caption-lg">
-                کد پیامک شده برای {phoneNumber} را وارد کنید
+        <div className={styles.loginForm}>
+            <img
+                src={smsIcon}
+                alt="sms icon"
+                className={styles.icon}
+            />
+            <h5 className="title2">یه کد برات فرستادیم</h5>
+            <p className={`${styles.subHeadline} sub-headline`}>
+                کد ۴ رقمی پیامک شده برای {phoneNumber} را وارد کنید
             </p>
             <OTPInput
                 onChange={otpChangeHandler}
                 value={otp}
-                inputStyle={`body-sm ${styles.input} ${hasError && "error"}`}
-                numInputs={6}
+                // inputStyle={hasError ? styles.inputError : styles.input}
+                numInputs={4}
                 separator={<span></span>}
-                renderInput={(props) => <input {...props} />}
+                renderInput={(props, index) => (
+                    <Input
+                        {...props}
+                        className={hasError ? "error" : ""}
+                    />
+                )}
+                // renderInput={(props) => <input {...props} />}
                 containerStyle={styles.otpContainer}
                 inputType="tel"
             />
@@ -111,19 +136,26 @@ const LoginOtpForm = ({phoneNumber}) => {
                     کد وارد شده اشتباه است
                 </ErrorMessage>
             )}
-            {remainingTime === 0 ? (
-                <Button onClick={sendOtpHandler} isSmall={true} type="tertiary">
-                    ارسال مجدد پیامک
-                </Button>
-            ) : (
+            {
+
                 <Button
-                    isSmall={true}
-                    type="tertiary"
-                    className={styles.deactiveBtn}
-                >
-                    ارسال مجدد تا <span> {remainingTime} </span> ثانیه دیگر
+                    className={styles.buttonRight}
+                    onClick={sendOtpHandler} callout={true} disabled={remainingTime !== 0}>
+                    {remainingTime === 0 ? "کد رو دریافت نکردم" :
+                        `کد رو دریافت نکردم (${minutes < 10 ? "0" + minutes : minutes}:${seconds < 10 ? "0" + seconds : seconds})`}
                 </Button>
-            )}
+            }
+            <Button
+                className={styles.buttonLeftEnd}
+                onClick={backBtnHandler}
+            >
+                <span className="button2">ویرایش شماره</span>
+                <img
+                    src={arrowLeftIcon}
+                    alt="arrow left icon"
+                    className={styles.icon}
+                />
+            </Button>
         </div>
     );
 };

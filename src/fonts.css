@@ -1,13 +1,19 @@
 @font-face {
     font-family: "Estedad-Regular";
-    src: url("./assets/fonts/Estedad-Regular.woff2") format("woff2");
+    src: url("./assets/fonts/Estedad-FD.woff2") format("woff2");
     font-weight: 400;
+    /*font-variation-settings:*/
+    /*        "Weight" 900,*/
+    /*        "Kshd" 88;*/
 }
 
 @font-face {
     font-family: "Estedad-Medium";
-    src: url("./assets/fonts/Estedad-Medium.woff2") format("woff2");
+    src: url("./assets/fonts/Estedad-FD.woff2") format("woff2");
     font-weight: 500;
+    /*font-variation-settings:*/
+    /*        "Weight" 500,*/
+    /*        "Kshd" 88;*/
 }
 
 * {

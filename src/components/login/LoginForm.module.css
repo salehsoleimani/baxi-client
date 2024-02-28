@@ -1,14 +1,20 @@
 .loginForm {
     display: flex;
     flex-direction: column;
-    align-items: stretch;
+    /*align-items: stretch;*/
+    /*align-items: start;*/
     justify-content: flex-start;
     width: 100%;
     height: 100vh;
     padding: 72px 24px 24px 24px;
 }
 
+.icon {
+    width: 52px;
+}
+
 .subHeadline {
+    margin-top: 8px;
     margin-bottom: 24px;
     color: var(--color-tertiary-dark);
 }
@@ -24,9 +30,41 @@
     width: 100%;
     padding-right: 16px;
 }
+.loginForm Input{
+    align-self: stretch;
+
+}
 
 .loginForm Button {
-    margin-top: auto;
     border-radius: var(--border-radius-2);
+}
+
+.buttonRight{
     align-self: flex-start;
+}
+
+.buttonRightEnd {
+    margin-top: auto;
+    align-self: flex-start;
+}
+
+.buttonLeftEnd {
+    margin-top: auto;
+    align-self: flex-end;
+}
+
+
+
+
+.otpContainer{
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    flex-direction: row-reverse;
+    margin-bottom: 24px;
+}
+
+.otpContainer Input{
+    width: 64px;
 }

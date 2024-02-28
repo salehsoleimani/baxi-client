@@ -13,6 +13,10 @@
     /*transition: 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);*/
 }
 
+.btn img{
+    width: 24px;
+}
+
 .btn.filled {
     background-color: var(--color-primary-normal);
     color: #fff;
@@ -34,7 +38,7 @@
 }
 
 .btn.callout {
-    background-color: var(--color-tertiary-normal);
+    background-color: var(--color-tertiary-white-normal);
     color: var(--color-tertiary-darker);
 }
 
@@ -60,8 +64,8 @@
 }
 
 .btn.callout:disabled {
-    background-color: var(--color-tertiary-normal);
-    color: var(--color-tertiary-white-normal);
+    background-color: var(--color-tertiary-white-normal);
+    color: var(--color-tertiary-normal);
 }
 
 
@@ -85,10 +89,10 @@
     color: var(--color-primary-lighter);
 }
 
-.btn.callout:hover {
-    background-color: var(--color-tertiary-white-normal);
-    color: var(--color-tertiary-darker);
-}
+/*.btn.callout:hover {*/
+/*    background-color: var(--color-tertiary-white-normal);*/
+/*    color: var(--color-tertiary-darker);*/
+/*}*/
 
 
 .btn.filled:focus {

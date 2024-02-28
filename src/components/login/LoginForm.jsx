@@ -46,7 +46,7 @@ const LoginForm = ({phoneNumber, setPhoneNumber}) => {
                     onChange={inputChangeHandler}
                     placeholder="شماره موبایل"
                     id="phone-number"
-                    className={hasError ? `error` : styles.input}
+                    className={hasError ? `error` : ''}
                 />
                 {hasError && (
                     <ErrorMessage>شماره وارد شده نامعتبر است</ErrorMessage>
@@ -57,7 +57,7 @@ const LoginForm = ({phoneNumber, setPhoneNumber}) => {
                 className={`${styles.caption} caption`}
             >کد تائید رو به این شماره پیامک می‌کنیم</span>
 
-            <Button type="filled">
+            <Button type="filled" className={styles.buttonRightEnd}>
                 <img
                     src={arrowRight}
                     alt="arrow icon"
