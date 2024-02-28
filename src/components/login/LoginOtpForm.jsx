@@ -10,6 +10,7 @@ import arrowLeftIcon from "../../assets/icons/arrow-left.svg"
 import inputStyles from "../../components/ui/Input.module.css"
 import Input from "../ui/Input";
 import Loading from "../ui/Loading";
+import {CircularProgress} from "@mui/joy";
 
 const WAITING_TIME = 120;
 const OTP_LENGTH = 4;
@@ -106,7 +107,7 @@ const LoginOtpForm = ({phoneNumber}) => {
     };
 
     return (
-        isLoading ? <Loading/> : <div className={styles.loginForm}>
+        <div className={styles.loginForm}>
             <img
                 src={smsIcon}
                 alt="sms icon"
@@ -116,20 +117,24 @@ const LoginOtpForm = ({phoneNumber}) => {
             <p className={`${styles.subHeadline} sub-headline`}>
                 کد ۴ رقمی پیامک شده برای {phoneNumber} را وارد کنید
             </p>
-            <OTPInput
-                onChange={otpChangeHandler}
-                value={otp}
-                inputStyle={`sub-headline ${styles.input} ${hasError && "error"}`}
-                numInputs={4}
-                separator={<span></span>}
+            {isLoading ? <CircularProgress style={{ margin: '0 auto' }}  color="neutral"
+                                            size="md"
+                                            variant="plain"/> :
+                <OTPInput
+                    onChange={otpChangeHandler}
+                    value={otp}
+                    inputStyle={`sub-headline ${styles.input} ${hasError && "error"}`}
+                    numInputs={4}
+                    separator={<span></span>}
 
-                renderInput={(props) => <input {...props} />}
-                containerStyle={styles.otpContainer}
-                inputType="tel"
-                shouldAutoFocus={true}
+                    renderInput={(props) => <input {...props} />}
+                    containerStyle={styles.otpContainer}
+                    inputType="tel"
+                    shouldAutoFocus={true}
 
-            />
-            {hasError && (
+                />
+            }
+            {hasError && !isLoading && (
                 <ErrorMessage className={styles.error}>
                     کدی که وارد کردی اشتباهه
                 </ErrorMessage>
