@@ -41,6 +41,7 @@
 
 .buttonRight{
     align-self: flex-start;
+    margin-block: 24px;
 }
 
 .buttonRightEnd {
@@ -62,9 +63,45 @@
     align-items: center;
     justify-content: space-between;
     flex-direction: row-reverse;
-    margin-bottom: 24px;
+    /*margin-bottom: 24px;*/
 }
 
-.otpContainer Input{
+.otpContainer input{
     width: 64px;
+    height: 64px;
+}
+
+
+.input {
+    outline: none;
+    border: 1px solid var(--color-tertiary-light-active);
+    border-radius: var(--border-radius-1);
+    padding: 16px 24px;
+    width: 64px !important;
+    height: 64px !important;
+    color: var(--color-tertiary-darker);
+}
+
+.input:global(.error) {
+    border-color: var(--color-error-normal);
+    background-color: var(--color-error-light);
+}
+
+.input:global(.system) {
+    border: none;
+    background-color: var(--color-primary-lighter);
+}
+
+.input::placeholder {
+    color: var(--color-tertiary-normal);
+}
+
+.input:focus {
+    border: 2px solid var(--color-primary-normal);
+}
+
+.error {
+    color: var(--color-error-normal);
+    align-self: center;
+    margin-top: 16px;
 }

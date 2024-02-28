@@ -42,7 +42,7 @@ const LoginPage = () => {
 
 
     return (
-        isLoading ? <Loading/> : <Outlet context={{isLoading: isLoading, setIsLoading}}/>
+        isLoading ? <Loading/> : <Outlet/>
     );
 };
 

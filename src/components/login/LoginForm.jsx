@@ -7,9 +7,10 @@ import {useAuth} from "../../context/AuthProvider";
 import useUrl from "../../hooks/useUrl";
 import styles from "./LoginForm.module.css"
 import arrowRight from "../../assets/icons/arrow-right.svg"
+import Loading from "../ui/Loading";
 
 const LoginForm = ({phoneNumber, setPhoneNumber}) => {
-    const {isLoading, setIsLoading} = useOutletContext();
+    const [isLoading, setIsLoading] = useState(false);
 
     const [hasError, setHasError] = useState(false);
     const navigate = useNavigate();
@@ -36,7 +37,7 @@ const LoginForm = ({phoneNumber, setPhoneNumber}) => {
     };
 
     return (
-        <form className={styles.loginForm} onSubmit={submitHandler}>
+        isLoading ? <Loading/> : <form className={styles.loginForm} onSubmit={submitHandler}>
             <h5 className="title2">ورود</h5>
             <p className={`${styles.subHeadline} sub-headline`}>شماره موبایلت رو بزن تا یه کد برات بفرستیم</p>
             <div className={styles.inputField}>

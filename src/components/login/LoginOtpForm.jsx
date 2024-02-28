@@ -9,14 +9,15 @@ import smsIcon from "../../assets/glass-icons/Chat.png"
 import arrowLeftIcon from "../../assets/icons/arrow-left.svg"
 import inputStyles from "../../components/ui/Input.module.css"
 import Input from "../ui/Input";
+import Loading from "../ui/Loading";
 
 const WAITING_TIME = 120;
 const OTP_LENGTH = 4;
 
 const LoginOtpForm = ({phoneNumber}) => {
-    const {isLoading, setIsLoading} = useOutletContext();
     const BASE_URL = useUrl();
     const [otp, setOtp] = useState();
+    const [isLoading, setIsLoading] = useState(false);
     const [hasError, setHasError] = useState(false);
     const [remainingTime, setRemainingTime] = useState(WAITING_TIME);
     const navigate = useNavigate();
@@ -26,7 +27,6 @@ const LoginOtpForm = ({phoneNumber}) => {
     let minutes = Math.floor((remainingSeconds - (hours * 3600)) / 60)
     let seconds = remainingSeconds - (hours * 3600) - (minutes * 60);
 
-    // send otp to user phone
     const sendOtp = useCallback(async () => {
         console.log(phoneNumber)
         await fetch(`${BASE_URL}api/auth/otp/`,
@@ -42,7 +42,6 @@ const LoginOtpForm = ({phoneNumber}) => {
         );
     }, [phoneNumber, BASE_URL]);
 
-    // resend-button timer
     useEffect(() => {
         if (remainingTime === 0) return;
         const timer = setInterval(() => {
@@ -69,13 +68,13 @@ const LoginOtpForm = ({phoneNumber}) => {
         if (value.length === OTP_LENGTH) {
             const userLoginInfo = {
                 phone_number: phoneNumber,
-                otp: value,
+                otp_code: value,
             };
             const validateOtp = async () => {
                 setIsLoading(true);
 
                 try {
-                    const res = await fetch(`${BASE_URL}api/account/login/`, {
+                    const res = await fetch(`${BASE_URL}api/auth/login/`, {
                         method: "POST",
                         credentials: 'same-origin',
                         headers: {
@@ -84,12 +83,14 @@ const LoginOtpForm = ({phoneNumber}) => {
                         },
                         body: JSON.stringify(userLoginInfo),
                     });
-                    if (!res.ok) throw new Error("");
+
+                    if (res.status !== 200) throw new Error("");
+
                     const cookies = res.headers.get('Set-Cookie');
-                    localStorage.setItem("baxi-access", cookies.get("Access-Token"));
-                    localStorage.setItem("baxi-refresh", cookies.get("Refresh-Token"));
-                    navigate("/my-account");
-                } catch {
+                    localStorage.setItem("Refresh-Token", cookies.get("Refresh-Token"));
+                    localStorage.setItem("Access-Token", cookies.get("Access-Token"));
+                    navigate("/home");
+                } catch (e) {
                     setHasError(true);
                 } finally {
                     setIsLoading(false);
@@ -105,7 +106,7 @@ const LoginOtpForm = ({phoneNumber}) => {
     };
 
     return (
-        <div className={styles.loginForm}>
+        isLoading ? <Loading/> : <div className={styles.loginForm}>
             <img
                 src={smsIcon}
                 alt="sms icon"
@@ -118,22 +119,19 @@ const LoginOtpForm = ({phoneNumber}) => {
             <OTPInput
                 onChange={otpChangeHandler}
                 value={otp}
-                // inputStyle={hasError ? styles.inputError : styles.input}
+                inputStyle={`sub-headline ${styles.input} ${hasError && "error"}`}
                 numInputs={4}
                 separator={<span></span>}
-                renderInput={(props, index) => (
-                    <Input
-                        {...props}
-                        className={hasError ? "error" : ""}
-                    />
-                )}
-                // renderInput={(props) => <input {...props} />}
+
+                renderInput={(props) => <input {...props} />}
                 containerStyle={styles.otpContainer}
                 inputType="tel"
+                shouldAutoFocus={true}
+
             />
             {hasError && (
                 <ErrorMessage className={styles.error}>
-                    کد وارد شده اشتباه است
+                    کدی که وارد کردی اشتباهه
                 </ErrorMessage>
             )}
             {
