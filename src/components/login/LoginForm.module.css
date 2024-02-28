@@ -1,0 +1,107 @@
+.loginForm {
+    display: flex;
+    flex-direction: column;
+    /*align-items: stretch;*/
+    /*align-items: start;*/
+    justify-content: flex-start;
+    width: 100%;
+    height: 100vh;
+    padding: 72px 24px 24px 24px;
+}
+
+.icon {
+    width: 52px;
+}
+
+.subHeadline {
+    margin-top: 8px;
+    margin-bottom: 24px;
+    color: var(--color-tertiary-dark);
+}
+
+.inputField {
+    margin-bottom: 8px;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+}
+
+.inputField input {
+    width: 100%;
+    padding-right: 16px;
+}
+.loginForm Input{
+    align-self: stretch;
+
+}
+
+.loginForm Button {
+    border-radius: var(--border-radius-2);
+}
+
+.buttonRight{
+    align-self: flex-start;
+    margin-block: 24px;
+}
+
+.buttonRightEnd {
+    margin-top: auto;
+    align-self: flex-start;
+}
+
+.buttonLeftEnd {
+    margin-top: auto;
+    align-self: flex-end;
+}
+
+
+
+
+.otpContainer{
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    flex-direction: row-reverse;
+    /*margin-bottom: 24px;*/
+}
+
+.otpContainer input{
+    width: 64px;
+    height: 64px;
+}
+
+
+.input {
+    outline: none;
+    border: 1px solid var(--color-tertiary-light-active);
+    border-radius: var(--border-radius-1);
+    padding: 16px 24px;
+    width: 64px !important;
+    height: 64px !important;
+    color: var(--color-tertiary-darker);
+}
+
+.input:global(.error) {
+    border-color: var(--color-error-normal);
+    background-color: var(--color-error-light);
+}
+
+.input:global(.system) {
+    border: none;
+    background-color: var(--color-primary-lighter);
+}
+
+.input::placeholder {
+    color: var(--color-tertiary-normal);
+}
+
+.input:focus {
+    border: 2px solid var(--color-primary-normal);
+}
+
+.error {
+    color: var(--color-error-normal);
+    align-self: center;
+    margin-top: 16px;
+}

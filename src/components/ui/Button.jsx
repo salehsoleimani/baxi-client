@@ -1,7 +1,7 @@
 import styles from "./Button.module.css";
 
 const Button = ({
-                    type,
+                    type = "callout",
                     disabled,
                     children,
                     onClick,
@@ -9,7 +9,11 @@ const Button = ({
                     callout
                 }) => {
     const clickHandler = (e) => {
+        if (!onClick)
+            return;
         e.stopPropagation();
+        e.target.blur();
+        e.preventDefault()
         onClick();
     };
 

@@ -1,15 +1,37 @@
-// App.jsx
-import React, {Fragment} from 'react';
-import Button from "./components/ui/Button";
-import Input from "./components/ui/Input";
-import Loading from "./components/ui/Loading";
+import {BrowserRouter, Route, Routes} from "react-router-dom";
+import LoginPage from "./pages/LoginPage";
+import LoginForm from "./components/login/LoginForm";
+import LoginOtpForm from "./components/login/LoginOtpForm";
+import {UrlProvider} from "./context/UrlProvider";
+import {AuthProvider} from "./context/AuthProvider";
+import {useState} from "react";
 
-export default function App() {
+const App = () => {
+    const [phoneNumber, setPhoneNumber] = useState("");
+
     return (
-        <Fragment>
-            <Input placeholder="نام خانوادگی"/>
-            <Button type="tonal">ادامه</Button>
-            <Loading/>
-        </Fragment>
+        <AuthProvider>
+            <UrlProvider>
+                <BrowserRouter>
+                    <Routes>
+                        <Route path='login' element={<LoginPage/>}>
+                            <Route
+                                index
+                                element={<LoginForm
+                                    phoneNumber={phoneNumber}
+                                    setPhoneNumber={setPhoneNumber}/>}
+                            />
+                            <Route
+                                path="otp"
+                                element={<LoginOtpForm
+                                    phoneNumber={phoneNumber}/>}
+                            />
+                        </Route>
+                    </Routes>
+                </BrowserRouter>
+            </UrlProvider>
+        </AuthProvider>
     );
-}
+};
+
+export default App;
