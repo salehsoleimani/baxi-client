@@ -19,14 +19,16 @@ const LoginOtpForm = ({phoneNumber}) => {
 
     // send otp to user phone
     const sendOtp = useCallback(async () => {
+        console.log(phoneNumber)
         await fetch(`${BASE_URL}api/auth/otp/`,
             {
                 method: 'POST',
                 headers: {
-                    'Accept': 'application/json',
                     'Content-Type': 'application/json'
                 },
-                body: JSON.stringify({phone_number: phoneNumber})
+                body: JSON.stringify({
+                    phone_number: phoneNumber,
+                }),
             }
         );
     }, [phoneNumber, BASE_URL]);

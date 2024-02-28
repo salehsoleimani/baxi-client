@@ -8,10 +8,9 @@ import useUrl from "../../hooks/useUrl";
 import styles from "./LoginForm.module.css"
 import arrowRight from "../../assets/icons/arrow-right.svg"
 
-const LoginForm = () => {
+const LoginForm = ({phoneNumber, setPhoneNumber}) => {
     const {isLoading, setIsLoading} = useOutletContext();
 
-    const [phoneNumber, setPhoneNumber] = useState("");
     const [hasError, setHasError] = useState(false);
     const navigate = useNavigate();
 
@@ -21,16 +20,14 @@ const LoginForm = () => {
     };
 
     const phoneValidate = () => {
-        if (phoneNumber.length < 10 || phoneNumber.length > 13) {
+        if (!phoneNumber.match(/((0?9)|(\+?989))\d{2}\W?\d{3}\W?\d{4}/g)) {
             setHasError(true);
             return false;
-        } else {
-            return true;
         }
+        return true
     };
 
     const submitHandler = (e) => {
-        setIsLoading(true);
         e.preventDefault();
         setHasError(false);
         if (!phoneValidate()) return;

@@ -14,6 +14,7 @@ const LoginPage = () => {
     const [token, setToken] = useState(() => {
         return localStorage.getItem("Access-Token");
     });
+
     useEffect(() => {
         const checkLogin = async () => {
             setIsLoading(true);
@@ -21,10 +22,11 @@ const LoginPage = () => {
                 method: "GET",
                 headers: {
                     "content-type": "application/json",
-                    Authorization: `Bearer ${token}`,
+                    "Authorization": `Bearer ${token}`,
                     "X-CSRF-TOKEN": localStorage.getItem("CSRF-Token"),
                 },
             });
+            console.log(res);
             if (!res.ok) {
                 const isLogin = await getAccess(setToken);
                 if (isLogin) {
@@ -33,10 +35,11 @@ const LoginPage = () => {
             } else {
                 navigate("/home");
             }
-            setIsLoading(false)
+            setIsLoading(false);
         };
         checkLogin();
     }, [token, BASE_URL, navigate]);
+
 
     return (
         isLoading ? <Loading/> : <Outlet context={{isLoading: isLoading, setIsLoading}}/>
