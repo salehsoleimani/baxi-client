@@ -13,7 +13,7 @@ const LoginPage = () => {
         // if user has logged in navigate to home
         (async () => {
             setIsLoading(true);
-            await axios.get('api/auth/me/', {
+            await axios.get('auth/me/', {
                 signal: abortController.signal
             })
                 .then(() => navigate('/home'))
