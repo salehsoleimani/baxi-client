@@ -129,7 +129,7 @@ const LoginOtpForm = ({phoneNumber}) => {
             <Button
                 className={styles.buttonRight}
                 onClick={sendOtpHandler} callout={true} disabled={remainingTime !== 0}>
-                {remainingTime === 0 ? "کد رو دریافت نکردم" : `کد رو دریافت نکردم (${minutes < 10 ? "0" + minutes : minutes}:${seconds < 10 ? "0" + seconds : seconds})`}
+                {remainingTime === 0 ? "کدی دریافت نکردم" : `کد رو دریافت نکردم (${minutes < 10 ? "0" + minutes : minutes}:${seconds < 10 ? "0" + seconds : seconds})`}
             </Button>}
         <Button
             className={styles.buttonLeftEnd}
