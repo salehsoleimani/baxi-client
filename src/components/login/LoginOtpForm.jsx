@@ -8,11 +8,14 @@ import smsIcon from "../../assets/glass-icons/Chat.png"
 import arrowLeftIcon from "../../assets/icons/arrow-left.svg"
 import {CircularProgress} from "@mui/joy";
 import axios from "../../helpers/axios";
+import useAuth from "../../hooks/useAuth";
 
 const WAITING_TIME = 120;
 const OTP_LENGTH = 4;
 
 const LoginOtpForm = ({phoneNumber}) => {
+    const {setAuth} = useAuth();
+
     const [otp, setOtp] = useState();
     const [isLoading, setIsLoading] = useState(false);
     const [hasError, setHasError] = useState(false);
@@ -38,7 +41,7 @@ const LoginOtpForm = ({phoneNumber}) => {
             console.log(err);
             navigate('/login', {state: {from: location, status_code: err.response.status}, replace: true});
         });
-    }, [phoneNumber]);
+    }, [location, phoneNumber]);
 
     useEffect(() => {
         if (remainingTime === 0) return;
@@ -68,14 +71,18 @@ const LoginOtpForm = ({phoneNumber}) => {
                 setIsLoading(true);
 
                 const res = await axios.post('auth/login/', userLoginInfo, {
-                    credentials: 'same-origin', headers: {
-                        "Accept": "application/json", "Content-Type": "application/json"
+                    withCredentials: true,
+                    // TODO: consider in production:
+                    // credentials: 'same-origin',
+                    headers: {
+                        "Accept": "application/json",
+                        "Content-Type": "application/json"
                     },
                 }).then(() => {
-                    const cookies = res.headers.get('Set-Cookie');
-                    localStorage.setItem("Refresh-Token", cookies.get("Refresh-Token"));
-                    localStorage.setItem("Access-Token", cookies.get("Access-Token"));
-                    navigate("/home");
+                    const accessToken = res?.data?.accessToken;
+                    const refreshToken = res?.data?.refreshToken;
+                    setAuth({accessToken, refreshToken});
+                    navigate("/home", {replace: true});
                 }).catch(err => {
                     setHasError(true);
                 });
