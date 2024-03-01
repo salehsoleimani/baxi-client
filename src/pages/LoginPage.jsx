@@ -1,49 +1,36 @@
-import {Outlet, useLocation, useNavigate} from "react-router-dom";
+import {Outlet, useNavigate} from "react-router-dom";
 import {useEffect, useState} from "react";
-import getAccess from "../helpers/getAccess";
-import useUrl from "../hooks/useUrl";
 import Loading from '../components/ui/Loading'
+import useAxiosPrivate from "../hooks/useAxiosPrivate";
 
 const LoginPage = () => {
     const navigate = useNavigate();
-
-    const location = useLocation();
-    const BASE_URL = useUrl();
     const [isLoading, setIsLoading] = useState(false);
-
-    const [token, setToken] = useState(() => {
-        return localStorage.getItem("Access-Token");
-    });
+    const axiosPrivate = useAxiosPrivate();
 
     useEffect(() => {
-        const checkLogin = async () => {
+        const abortController = new AbortController();
+
+        (async () => {
             setIsLoading(true);
-            const res = await fetch(`${BASE_URL}api/auth/me/`, {
-                method: "GET",
-                headers: {
-                    "content-type": "application/json",
-                    "Authorization": `Bearer ${token}`,
-                    "X-CSRF-TOKEN": localStorage.getItem("CSRF-Token"),
-                },
-            });
-            console.log(res);
-            if (!res.ok) {
-                const isLogin = await getAccess(setToken);
-                if (isLogin) {
-                    navigate("/dashboard");
-                }
-            } else {
-                navigate("/home");
+            try {
+                const res = await axiosPrivate.get('api/auth/me/', {
+                    signal: abortController.signal
+                });
+                console.log(res.data);
+                navigate('/home');
+            } catch (err) {
+                // not authenticated
+                console.log(err);
             }
             setIsLoading(false);
-        };
-        checkLogin();
-    }, [token, BASE_URL, navigate]);
+        })();
+
+        return () => abortController.abort('component did unmount')
+    }, [navigate, axiosPrivate]);
 
 
-    return (
-        isLoading ? <Loading/> : <Outlet/>
-    );
+    return (isLoading ? <Loading/> : <Outlet/>);
 };
 
 export default LoginPage;

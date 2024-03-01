@@ -10,27 +10,21 @@ const App = () => {
     const [phoneNumber, setPhoneNumber] = useState("");
 
     return (
-        <AuthProvider>
-            <UrlProvider>
-                <BrowserRouter>
-                    <Routes>
-                        <Route path='login' element={<LoginPage/>}>
-                            <Route
-                                index
-                                element={<LoginForm
-                                    phoneNumber={phoneNumber}
-                                    setPhoneNumber={setPhoneNumber}/>}
-                            />
-                            <Route
-                                path="otp"
-                                element={<LoginOtpForm
-                                    phoneNumber={phoneNumber}/>}
-                            />
-                        </Route>
-                    </Routes>
-                </BrowserRouter>
-            </UrlProvider>
-        </AuthProvider>
+        <Routes>
+            <Route path='login' element={<LoginPage/>}>
+                <Route
+                    index
+                    element={<LoginForm
+                        phoneNumber={phoneNumber}
+                        setPhoneNumber={setPhoneNumber}/>}
+                />
+                <Route
+                    path="otp"
+                    element={<LoginOtpForm
+                        phoneNumber={phoneNumber}/>}
+                />
+            </Route>
+        </Routes>
     );
 };
 

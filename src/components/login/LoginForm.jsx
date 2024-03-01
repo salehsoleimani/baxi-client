@@ -3,8 +3,6 @@ import Input from "../ui/Input";
 import Button from "../ui/Button";
 import ErrorMessage from "../ui/ErrorMessage";
 import {useNavigate, useOutletContext} from "react-router-dom";
-import {useAuth} from "../../context/AuthProvider";
-import useUrl from "../../hooks/useUrl";
 import styles from "./LoginForm.module.css"
 import arrowRight from "../../assets/icons/arrow-right.svg"
 import Loading from "../ui/Loading";
