@@ -3,7 +3,7 @@ import styles from "./LoginForm.module.css";
 import OTPInput from "react-otp-input";
 import Button from "../ui/Button";
 import ErrorMessage from "../ui/ErrorMessage";
-import {useNavigate} from "react-router-dom";
+import {useLocation, useNavigate} from "react-router-dom";
 import smsIcon from "../../assets/glass-icons/Chat.png"
 import arrowLeftIcon from "../../assets/icons/arrow-left.svg"
 import {CircularProgress} from "@mui/joy";
@@ -19,6 +19,7 @@ const LoginOtpForm = ({phoneNumber}) => {
     const [remainingTime, setRemainingTime] = useState(WAITING_TIME);
 
     const navigate = useNavigate();
+    const location = useLocation();
 
     const remainingSeconds = remainingTime.toString(10);
     let hours = Math.floor(remainingSeconds / 3600);
@@ -35,9 +36,9 @@ const LoginOtpForm = ({phoneNumber}) => {
             },
         }).catch(err => {
             console.log(err);
-            // navigate(-1);
+            navigate('/login', {state: {from: location, status_code: err.response.status}, replace: true});
         });
-    }, [navigate, phoneNumber]);
+    }, [phoneNumber]);
 
     useEffect(() => {
         if (remainingTime === 0) return;
