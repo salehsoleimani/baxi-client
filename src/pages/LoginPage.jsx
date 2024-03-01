@@ -1,33 +1,28 @@
 import {Outlet, useNavigate} from "react-router-dom";
 import {useEffect, useState} from "react";
 import Loading from '../components/ui/Loading'
-import useAxiosPrivate from "../hooks/useAxiosPrivate";
+import axios from "../helpers/axios";
 
 const LoginPage = () => {
     const navigate = useNavigate();
     const [isLoading, setIsLoading] = useState(false);
-    const axiosPrivate = useAxiosPrivate();
 
     useEffect(() => {
         const abortController = new AbortController();
 
+        // if user has logged in navigate to home
         (async () => {
             setIsLoading(true);
-            try {
-                const res = await axiosPrivate.get('api/auth/me/', {
-                    signal: abortController.signal
-                });
-                console.log(res.data);
-                navigate('/home');
-            } catch (err) {
-                // not authenticated
-                console.log(err);
-            }
+            await axios.get('api/auth/me/', {
+                signal: abortController.signal
+            })
+                .then(() => navigate('/home'))
+                .catch(err => console.log(err));
             setIsLoading(false);
         })();
 
         return () => abortController.abort('component did unmount')
-    }, [navigate, axiosPrivate]);
+    }, [navigate]);
 
 
     return (isLoading ? <Loading/> : <Outlet/>);
