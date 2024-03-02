@@ -1,0 +1,63 @@
+.EnterName {
+    display: flex;
+    flex-direction: column;
+    /*align-items: stretch;*/
+    /*align-items: start;*/
+    justify-content: flex-start;
+    width: 100%;
+    height: 100vh;
+    padding: 72px 24px 24px 24px;
+}
+
+.icon {
+    width: 52px;
+}
+
+.header{
+    display: flex;
+    justify-content: space-between;
+
+}
+
+.arrow{
+    width: 32px;
+    height: 32px;
+}
+
+.title{
+    margin-top: 16px;
+    margin-bottom: 8px;
+}
+
+.subHeadLine {
+    color: var(--color-tertiary-dark);
+    margin-bottom: 24px;
+}
+
+.inputField {
+    margin-bottom: 16px;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+}
+
+.inputField input {
+    width: 100%;
+    padding-right: 16px;
+}
+
+.EnterName Input{
+    align-self: stretch;
+
+}
+
+.EnterName Button {
+    /* border-radius: var(--border-radius-2); */
+}
+
+.button{
+    align-self: flex-start;
+    margin-block: 24px;
+    width: 100%;
+}
+
