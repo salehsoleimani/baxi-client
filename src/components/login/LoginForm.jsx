@@ -18,7 +18,6 @@ const LoginForm = ({phoneNumber, setPhoneNumber}) => {
     // Handle Spam And Bad Gateway
     useEffect(() => {
         if (from_status_code === 502) setError("مشکلی در ارسال پیامک از طرف ما پیش اومده، لطفا دوباره امتحان کنید");
-        else if (from_status_code === 400) setError("به تازگی درخواست کد فعالسازی فرستاده‌اید، تا یک دقیقه دیگر مجددا امتحان کنید");
     }, [from_status_code])
 
 

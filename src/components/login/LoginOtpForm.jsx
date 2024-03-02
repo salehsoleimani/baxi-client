@@ -18,7 +18,7 @@ const LoginOtpForm = ({phoneNumber}) => {
 
     const [otp, setOtp] = useState();
     const [isLoading, setIsLoading] = useState(false);
-    const [hasError, setHasError] = useState(false);
+    const [error, setError] = useState(null);
     const [remainingTime, setRemainingTime] = useState(WAITING_TIME);
 
     const navigate = useNavigate();
@@ -39,7 +39,10 @@ const LoginOtpForm = ({phoneNumber}) => {
             },
         }).catch(err => {
             console.log(err);
-            navigate('/login', {state: {from: location, status_code: err.response.status}, replace: true});
+            const status_code = err.response?.status
+            if (status_code === 400) return setError("به تازگی درخواست کد فعالسازی فرستاده‌اید، تا یک دقیقه دیگر مجددا امتحان کنید");
+            else if (!status_code)  return setError("اتصال خود به اینترنت را بررسی کنید");
+            navigate('/login', {state: {from: location, status_code: status_code}, replace: true});
         });
     }, [location, phoneNumber]);
 
@@ -60,7 +63,7 @@ const LoginOtpForm = ({phoneNumber}) => {
 
     const otpChangeHandler = (value) => {
         setOtp(value);
-        setHasError(false);
+        setError(null);
         if (value.length === OTP_LENGTH) {
             const userLoginInfo = {
                 phone_number: phoneNumber, otp_code: value,
@@ -84,7 +87,7 @@ const LoginOtpForm = ({phoneNumber}) => {
                     setAuth({accessToken, refreshToken});
                     navigate("/home", {replace: true});
                 }).catch(err => {
-                    setHasError(true);
+                    setError("کدی که وارد کردی اشتباهه");
                 });
 
                 setIsLoading(false);
@@ -118,7 +121,7 @@ const LoginOtpForm = ({phoneNumber}) => {
                                        variant="plain"/> : <OTPInput
             onChange={otpChangeHandler}
             value={otp}
-            inputStyle={`sub-headline ${styles.input} ${hasError && "error"}`}
+            inputStyle={`sub-headline ${styles.input} ${error!==null && "error"}`}
             numInputs={4}
             separator={<span></span>}
 
@@ -128,8 +131,8 @@ const LoginOtpForm = ({phoneNumber}) => {
             shouldAutoFocus={true}
 
         />}
-        {hasError && !isLoading && (<ErrorMessage className={styles.error}>
-            کدی که وارد کردی اشتباهه
+        {error!=null && !isLoading && (<ErrorMessage className={styles.error}>
+            {error}
         </ErrorMessage>)}
         {
 
