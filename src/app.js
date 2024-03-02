@@ -1,9 +1,7 @@
-import {BrowserRouter, Route, Routes} from "react-router-dom";
+import {Route, Routes} from "react-router-dom";
 import LoginPage from "./pages/LoginPage";
 import LoginForm from "./components/login/LoginForm";
 import LoginOtpForm from "./components/login/LoginOtpForm";
-import {UrlProvider} from "./context/UrlProvider";
-import {AuthProvider} from "./context/AuthProvider";
 import {useState} from "react";
 
 const App = () => {
