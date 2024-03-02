@@ -84,7 +84,7 @@ const LoginOtpForm = ({phoneNumber}) => {
                 }).then(() => {
                     const accessToken = res?.data?.accessToken;
                     const refreshToken = res?.data?.refreshToken;
-                    setAuth({accessToken, refreshToken});
+                    setAuth({accessToken});
                     navigate("/home", {replace: true});
                 }).catch(err => {
                     setError("کدی که وارد کردی اشتباهه");
