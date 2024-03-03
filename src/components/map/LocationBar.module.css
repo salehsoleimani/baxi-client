@@ -1,6 +1,6 @@
 .LocationBar {
     border-radius: var(--border-radius-1);
-    height: 280px;
+    height: 270px;
     width: 100%;
     position: absolute;
     bottom: -1rem;
