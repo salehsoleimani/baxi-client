@@ -1,10 +1,8 @@
 import EnterName from '../components/compliteProfile/EnterName';
+import { Outlet} from "react-router-dom";
+
 const CompliteProfilePage = () => {
-    return(
-        <div>
-            <EnterName />
-        </div>
-    )
+    return <Outlet />
 }
 
 export default CompliteProfilePage;

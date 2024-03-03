@@ -1,6 +1,6 @@
 {
-  "name": "My Weather App",
-  "short_name": "Weather App",
+  "name": "Baxi",
+  "short_name": "Baxi",
   "start_url": "./index.html",
   "display": "standalone",
   "background_color": "#f0f0f0",
