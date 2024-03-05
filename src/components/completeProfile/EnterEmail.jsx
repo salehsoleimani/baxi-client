@@ -10,7 +10,7 @@ import arrowRight from '../../assets/icons/arrow-right.svg'
 import { useState } from "react";
 
 const EnterEmail = () => {
-    const navigat = useNavigate();
+    const navigate = useNavigate();
     const [email, setEmail] = useState('')
     const EmailHandler = (e) => {
         setEmail(e.target.value)
@@ -20,7 +20,7 @@ const EnterEmail = () => {
         <div className={styles.EnterEmail}>
             <div className={styles.header}>
                 <img src={Notification} className={styles.icon} />
-                <img src={arrowLeft} className={styles.arrow} onClick={() => navigat(-1)} />
+                <img src={arrowLeft} className={styles.arrow} onClick={() => navigate(-1)} />
             </div>
             <h1 className={`title2 ${styles.title}`}>ایمیل</h1>
             <p className={`sub-headline ${styles.subHeadLine}`}>
@@ -36,7 +36,7 @@ const EnterEmail = () => {
                     className={styles.inputField}
                 />
                 <div className={styles.buttonsHolder}>
-                    <Button type="filled" className={styles.button} onClick={() => navigat('email')}>
+                    <Button type="filled" className={styles.button} onClick={() => navigate('email')}>
                         <img src={arrowRight} alt="arrow icon" />
                         <span className="button">ادامه</span>
                     </Button>

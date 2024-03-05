@@ -5,9 +5,9 @@ import LoginOtpForm from "./components/login/LoginOtpForm";
 import { UrlProvider } from "./context/UrlProvider";
 import { AuthProvider } from "./context/AuthProvider";
 import { useState } from "react";
-import CompliteProfilePage from "./pages/CompliteProfilePage";
-import EnterName from "./components/compliteProfile/EnterName";
-import EnterEmail from "./components/compliteProfile/EnterEmail";
+import CompleteProfilePage from "./pages/CompleteProfilePage";
+import EnterName from "./components/completeProfile/EnterName";
+import EnterEmail from "./components/completeProfile/EnterEmail";
 import Maps from "./components/map/Map";
 import ProfilePage from "./pages/ProfilePage";
 import MapPage from "./pages/MapPage";
@@ -40,8 +40,8 @@ const App = () => {
                             </Route>
                         </Route>
                         <Route
-                            path="complite_profile"
-                            element={<CompliteProfilePage />}>
+                            path="complete_profile"
+                            element={<CompleteProfilePage />}>
                             <Route
                                 index
                                 element={<EnterName />}

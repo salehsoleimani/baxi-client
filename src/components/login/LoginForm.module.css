@@ -4,10 +4,19 @@
     /*align-items: stretch;*/
     /*align-items: start;*/
     justify-content: flex-start;
-    width: 100%;
-    height: 100vh;
     padding: 72px 24px 24px 24px;
+    height: 100vh;
 }
+
+@media only screen
+and (min-device-width : 320px)
+and (max-device-width : 480px) {
+    .loginForm {
+        height: 100dvh;
+    }
+}
+
+
 
 .icon {
     width: 52px;
