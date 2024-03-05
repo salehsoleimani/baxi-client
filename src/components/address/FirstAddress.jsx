@@ -1,7 +1,7 @@
 import styles from "./FirstAddress.module.css";
 import rightArrow from "../../assets/glass-icons/arrow-right.svg";
-import addImg from "../../assets/glass-icons/Group 1171275056.svg";
-import add from "../../assets/glass-icons/add.svg";
+import addImg from "../../assets/icons/address_empty_state.svg";
+import add from "../../assets/icons/add.svg";
 
 const FirstAddress = () => {
   return (

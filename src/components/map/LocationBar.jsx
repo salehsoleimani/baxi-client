@@ -1,7 +1,7 @@
 import styles from './LocationBar.module.css'
 import regtangle from '../../assets/glass-icons/Rectangle.png'
-import location from '../../assets/glass-icons/location.svg'
-import search from '../../assets/glass-icons/search-normal.svg'
+import location from '../../assets/icons/location.svg'
+import search from '../../assets/icons/search-normal.svg'
 import star from '../../assets/glass-icons/Frame 427320646.svg'
 import Button from '../ui/Button'
 const LocationBar = () => {
