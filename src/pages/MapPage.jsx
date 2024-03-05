@@ -1,7 +1,8 @@
-import { Outlet } from 'react-router-dom'
+import {Outlet} from 'react-router-dom'
+
 const MapPage = () => {
     return (
-            <Outlet />
+        <Outlet/>
     )
 }
 
