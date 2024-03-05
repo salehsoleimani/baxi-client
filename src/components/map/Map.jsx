@@ -1,75 +1,78 @@
-import { useEffect, useRef, useState } from "react";
-import NeshanMap from "@neshan-maps-platform/react-openlayers";
+import React, { useEffect, useRef } from 'react';
+import 'ol/ol.css';
+import Map from 'ol/Map';
+import View from 'ol/View';
+import { fromLonLat, toLonLat } from 'ol/proj'; // Import the necessary projection functions
+import Feature from 'ol/Feature';
+import Point from 'ol/geom/Point';
+import { Icon, Style } from 'ol/style';
+import { Tile as TileLayer, Vector as VectorLayer } from 'ol/layer';
+import { OSM, Vector as VectorSource } from 'ol/source';
 import LocationBar from "./LocationBar";
-import styles from './Map.module.css';
-import ol from '@neshan-maps-platform/react-openlayers';
-// import { Point } from 'ol/geom';
+import styles from './Map.module.css'
+import k from '../../assets/glass-icons/location.png'
 
 const Maps = () => {
-    // const mapRef = useRef(null);
-    // const [marker, setMarker] = useState(null);
+    const mapRef = useRef(null);
 
-    // useEffect(() => {
-    //     const map = mapRef.current; // Directly access the map instance
+    useEffect(() => {
+        const neshanToken = 'web.11c86d9ad4654f708f74425d9a297b9f';
 
-    //     if (map) {
-    //         // Create a new marker feature
-    //         const markerFeature = new ol.Feature({
-    //             geometry: new ol.geom.Point(ol.proj.fromLonLat([51.4749824, 35.7665394])),
-    //         });
+        // Create a new instance of OpenLayers Map
+        const map = new Map({
+            target: mapRef.current,
+            layers: [
+                new TileLayer({
+                    source: new OSM(),
+                }),
+            ],
+            view: new View({
+                center: fromLonLat([51.388973, 35.689198]), // Tehran coordinates as an example
+                zoom: 12,
+            }),
+        });
 
-    //         // Create a marker style
-    //         const markerStyle = new ol.style.Style({
-    //             image: new ol.style.Icon({
-    //                 src: 'path/to/your/marker/icon.png',
-    //                 anchor: [0.5, 1],
-    //             }),
-    //         });
+        // Create a vector layer to add the icon
+        const vectorLayer = new VectorLayer({
+            source: new VectorSource(),
+        });
+        map.addLayer(vectorLayer);
 
-    //         markerFeature.setStyle(markerStyle);
+        // Create a point feature representing your icon
+        const iconFeature = new Feature({
+            geometry: new Point(fromLonLat([51.388973, 35.689198])), // Default location
+        });
 
-    //         // Add the marker to the map
-    //         const vectorSource = new ol.source.Vector({
-    //             features: [markerFeature],
-    //         });
+        // Define the style for the icon
+        const iconStyle = new Style({
+            image: new Icon({
+                anchor: [0.5, 46],
+                anchorXUnits: 'fraction',
+                anchorYUnits: 'pixels',
+                src: '../../assets/glass-icons/location.png', // URL to your icon image
+            }),
+        });
 
-    //         const vectorLayer = new ol.layer.Vector({
-    //             source: vectorSource,
-    //         });
+        iconFeature.setStyle(iconStyle);
+        vectorLayer.getSource().addFeature(iconFeature);
 
-    //         map.addLayer(vectorLayer);
+        // Handle map click event
+        map.on('click', (event) => {
+            const clickedCoordinate = event.coordinate;
+            const lonLat = toLonLat(clickedCoordinate); // Convert clicked coordinate to lon/lat
+            console.log('Clicked Coordinates:', lonLat);
+        });
 
-    //         setMarker(markerFeature);
+        // Cleanup function
+        return () => {
+            map.setTarget(null);
+        };
+    }, []);
 
-    //         // Update marker position when the map is moved
-    //         map.on('moveend', () => {
-    //             const center = map.getView().getCenter();
-    //             markerFeature.setGeometry(new ol.geom.Point(center));
-    //             console.log('Marker moved to:', center);
-    //         });
-
-    //         // Move marker to the clicked position
-    //         map.on('click', (event) => {
-    //             const coordinate = event.coordinate;
-    //             markerFeature.setGeometry(new ol.geom.Point(coordinate));
-    //             console.log('Marker set to:', coordinate);
-    //         });
-    //     }
-    // }, []);
-
-    return (
-        <div>
-            <NeshanMap
-                mapKey="web.11c86d9ad4654f708f74425d9a297b9f"
-                center={{ latitude: 35.7665394, longitude: 51.4749824 }}
-                zoom={14}
-                className={styles.map}
-                id='map'
-                // ref={mapRef}
-            />
-            <LocationBar />
-        </div>
-    );
+    return <div>
+       <div ref={mapRef} className={`map ${styles.map}`} style={{ width: '100vw', height: '400vh' }} />
+        <LocationBar />
+    </div>
 };
 
 export default Maps;

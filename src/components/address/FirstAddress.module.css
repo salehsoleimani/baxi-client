@@ -27,7 +27,6 @@
 }
 
 .bottom {
-  margin-top: 16px;
   border: none;
   background-color: #e6f8ff;
   color: #068cbf;
@@ -38,7 +37,7 @@
   align-items: center;
   justify-content: center;
   width: 200px;
-  margin: auto;
+  margin: 16px auto;
 }
 .bottom img {
   margin-left: 10px;
