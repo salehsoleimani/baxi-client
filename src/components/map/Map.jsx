@@ -10,7 +10,6 @@ import { Tile as TileLayer, Vector as VectorLayer } from 'ol/layer';
 import { OSM, Vector as VectorSource } from 'ol/source';
 import LocationBar from "./LocationBar";
 import styles from './Map.module.css'
-import k from '../../assets/glass-icons/location.png'
 
 const Maps = () => {
     const mapRef = useRef(null);
