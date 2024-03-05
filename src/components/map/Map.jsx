@@ -1,18 +1,24 @@
-import React, { useEffect, useRef } from 'react';
+import React, {useEffect, useRef} from 'react';
 import 'ol/ol.css';
 import Map from 'ol/Map';
 import View from 'ol/View';
-import { fromLonLat, toLonLat } from 'ol/proj'; // Import the necessary projection functions
+import {fromLonLat, toLonLat} from 'ol/proj'; // Import the necessary projection functions
 import Feature from 'ol/Feature';
 import Point from 'ol/geom/Point';
-import { Icon, Style } from 'ol/style';
-import { Tile as TileLayer, Vector as VectorLayer } from 'ol/layer';
-import { OSM, Vector as VectorSource } from 'ol/source';
+import {Icon, Style} from 'ol/style';
+import {Tile as TileLayer, Vector as VectorLayer} from 'ol/layer';
+import {OSM, Vector as VectorSource} from 'ol/source';
 import LocationBar from "./LocationBar";
 import styles from './Map.module.css'
+import {BottomSheet} from 'react-spring-bottom-sheet'
+import 'react-spring-bottom-sheet/dist/style.css'
+import {useState} from "react";
+import SheetContent from "../ui/SheetContent.tsx";
+import Expandable from "../ui/Expandable.tsx";
 
 const Maps = () => {
     const mapRef = useRef(null);
+    const [open, setOpen] = useState(true);
 
     useEffect(() => {
         const neshanToken = 'web.11c86d9ad4654f708f74425d9a297b9f';
@@ -69,8 +75,32 @@ const Maps = () => {
     }, []);
 
     return <div>
-       <div ref={mapRef} className={`map ${styles.map}`} style={{ width: '100vw', height: '400vh' }} />
-        <LocationBar />
+        <div ref={mapRef} className={`map ${styles.map}`} style={{width: '100vw', height: '400vh'}}/>
+        <BottomSheet open={open}
+
+                     snapPoints={({minHeight}) => minHeight}
+        >
+            <SheetContent>
+                <p>
+                    Using lets users close the sheet by swiping
+                    it down, tapping on the backdrop or by hitting on
+                    their keyboard.
+                </p>
+                <Expandable>
+                    <div className="bg-gray-200 block rounded-md h-10 w-full my-10"/>
+                    <p>
+                        The height adjustment is done automatically, it just works™!
+                    </p>
+                    <div className="bg-gray-200 block rounded-md h-10 w-full my-10"/>
+                </Expandable>
+                {/*<Button onClick={onDismiss} className="w-full">*/}
+                {/*    Dismiss*/}
+                {/*</Button>*/}
+            </SheetContent>
+            {/*salam*/}
+            {/*<LocationBar/>*/}
+
+        </BottomSheet>
     </div>
 };
 
