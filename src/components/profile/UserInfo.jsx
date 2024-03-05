@@ -1,6 +1,6 @@
 import rightArrow from "../../assets/glass-icons/arrow-right.svg";
 import leftArrow from "../../assets/glass-icons/arrow-left.svg";
-import styles from "./UsrInfo.module.css";
+import styles from "./UserInfo.module.css";
 import edit from "../../assets/icons/edit-2.svg";
 import wallet from "../../assets/glass-icons/Frame 427320643.svg";
 import treap from "../../assets/glass-icons/Frame 427320644.svg";
