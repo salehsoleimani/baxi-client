@@ -4,7 +4,7 @@ import LoginForm from "./components/login/LoginForm";
 import LoginOtpForm from "./components/login/LoginOtpForm";
 import {AuthProvider} from "./context/AuthProvider";
 import {useState} from "react";
-import Maps from "./components/map/Map";
+import Maps from "./components/map/HomePage";
 import ProfilePage from "./pages/ProfilePage";
 import MapPage from "./pages/MapPage";
 import AddressPage from "./pages/AddressPage";
