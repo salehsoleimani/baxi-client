@@ -1,4 +1,32 @@
-.map{
+.map {
     width: 100vw;
     height: 100vh;
+}
+
+.LocationBar {
+    display: flex;
+    flex-direction: column;
+}
+
+.LocationBar span {
+    margin-right: 8px;
+}
+
+.savedLocation {
+    display: flex;
+    align-items: center;
+    margin-left: 24px;
+}
+
+.savedLocations {
+    margin: 16px 0;
+    display: flex;
+}
+
+.LocationBar Button {
+    width: 100%;
+}
+
+.inputContainer {
+    width: 100%;
 }

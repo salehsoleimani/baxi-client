@@ -8,7 +8,6 @@ import Point from 'ol/geom/Point';
 import {Icon, Style} from 'ol/style';
 import {Tile as TileLayer, Vector as VectorLayer} from 'ol/layer';
 import {OSM, Vector as VectorSource} from 'ol/source';
-import LocationBar from "./LocationBar";
 import styles from './Map.module.css'
 import {BottomSheet} from 'react-spring-bottom-sheet'
 import 'react-spring-bottom-sheet/dist/style.css'
@@ -16,6 +15,9 @@ import {useState} from "react";
 import SheetContent from "../ui/SheetContent.tsx";
 import Expandable from "../ui/Expandable.tsx";
 import Button from "../ui/Button";
+import Input from "../ui/Input";
+import search from "../../assets/icons/search-normal.svg";
+import location from "../../assets/icons/location.svg";
 
 const Maps = () => {
     const mapRef = useRef(null);
@@ -25,16 +27,22 @@ const Maps = () => {
         const neshanToken = 'web.11c86d9ad4654f708f74425d9a297b9f';
 
         // Create a new instance of OpenLayers Map
+    //
+    // |"neshan"
+    //     |"dreamy"
+    //     |"dreamy-gold"
+    //     |"standard-night"
+    //     |"standard-day"
+    //     |"osm-bright"
         const map = new Map({
             target: mapRef.current,
-            layers: [
-                new TileLayer({
-                    source: new OSM(),
-                }),
-            ],
-            view: new View({
-                center: fromLonLat([51.388973, 35.689198]), // Tehran coordinates as an example
-                zoom: 12,
+            layers: [new TileLayer({
+                source: new OSM(),
+            }),], view: new View({
+                defaultType: "dreamy-gold",
+
+                center: fromLonLat([48.5148, 34.7983]), // Hamedan coordinates
+                zoom: 17,
             }),
         });
 
@@ -84,24 +92,33 @@ const Maps = () => {
 
                      snapPoints={({minHeight}) => minHeight}
         >
-            <SheetContent>
-                <LocationBar/>
-                {/*<p>*/}
-                {/*    Using lets users close the sheet by swiping*/}
-                {/*    it down, tapping on the backdrop or by hitting on*/}
-                {/*    their keyboard.*/}
-                {/*</p>*/}
-                {/*<Expandable>*/}
+            <SheetContent className={styles.LocationBar}>
+                {/*<div  className={styles.inputSearch}>*/}
+                <Input
+                    placeholder="جستجوی..."
+                    className={styles.inputContainer}
+                    // className={`sub-headline ${styles.input}`}
+                    type='search'>
+                    <img src={search} alt="search"/>
+                    <img src={location} alt="location"/>
+                </Input>
 
-                    {/*<div className="bg-gray-200 block rounded-md h-10 w-full my-10"/>*/}
-                    {/*<p>*/}
-                    {/*    The height adjustment is done automatically, it just works™!*/}
-                    {/*</p>*/}
-                    {/*<div className="bg-gray-200 block rounded-md h-10 w-full my-10"/>*/}
-                {/*</Expandable>*/}
-                {/*<Button onClick={onDismiss} className="w-full">*/}
-                {/*    Dismiss*/}
-                {/*</Button>*/}
+
+                {/*</div>*/}
+                <div className={styles.savedLocations}>
+                    <div className={styles.savedLocation}>
+                        {/*<img src={star} />*/}
+                        <span>خونه</span>
+                    </div>
+                    <div className={styles.savedLocation}>
+                        {/*<img src={star} />*/}
+                        <span>خونه</span>
+
+                    </div>
+                </div>
+                <Button type="filled" className={styles.bottomSheetButton}>
+                    <span className="button2">تایید مبدا</span>
+                </Button>
             </SheetContent>
 
 
