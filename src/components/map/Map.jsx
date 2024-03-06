@@ -15,6 +15,7 @@ import 'react-spring-bottom-sheet/dist/style.css'
 import {useState} from "react";
 import SheetContent from "../ui/SheetContent.tsx";
 import Expandable from "../ui/Expandable.tsx";
+import Button from "../ui/Button";
 
 const Maps = () => {
     const mapRef = useRef(null);
@@ -78,27 +79,31 @@ const Maps = () => {
         <div ref={mapRef} className={`map ${styles.map}`} style={{width: '100vw', height: '400vh'}}/>
         <BottomSheet open={open}
 
+                     blocking={false}
+                     expandOnContentDrag={true}
+
                      snapPoints={({minHeight}) => minHeight}
         >
             <SheetContent>
-                <p>
-                    Using lets users close the sheet by swiping
-                    it down, tapping on the backdrop or by hitting on
-                    their keyboard.
-                </p>
-                <Expandable>
-                    <div className="bg-gray-200 block rounded-md h-10 w-full my-10"/>
-                    <p>
-                        The height adjustment is done automatically, it just works™!
-                    </p>
-                    <div className="bg-gray-200 block rounded-md h-10 w-full my-10"/>
-                </Expandable>
+                <LocationBar/>
+                {/*<p>*/}
+                {/*    Using lets users close the sheet by swiping*/}
+                {/*    it down, tapping on the backdrop or by hitting on*/}
+                {/*    their keyboard.*/}
+                {/*</p>*/}
+                {/*<Expandable>*/}
+
+                    {/*<div className="bg-gray-200 block rounded-md h-10 w-full my-10"/>*/}
+                    {/*<p>*/}
+                    {/*    The height adjustment is done automatically, it just works™!*/}
+                    {/*</p>*/}
+                    {/*<div className="bg-gray-200 block rounded-md h-10 w-full my-10"/>*/}
+                {/*</Expandable>*/}
                 {/*<Button onClick={onDismiss} className="w-full">*/}
                 {/*    Dismiss*/}
                 {/*</Button>*/}
             </SheetContent>
-            {/*salam*/}
-            {/*<LocationBar/>*/}
+
 
         </BottomSheet>
     </div>

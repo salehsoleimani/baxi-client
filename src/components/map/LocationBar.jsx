@@ -1,21 +1,24 @@
 import styles from './LocationBar.module.css'
 import location from '../../assets/icons/location.svg'
 import search from '../../assets/icons/search-normal.svg'
-// import star from '../../assets/glass-icons/Frame 427320646.svg'
 import Button from '../ui/Button'
+import Input from "../ui/Input";
+
 const LocationBar = () => {
     return (
         <div className={styles.LocationBar}>
-            {/*<img src={regtangle} className={styles.icon} />*/}
-            <div  className={styles.inputSearch}>
-                <img src={search} />
-                <input
-                    className={`sub-headline ${styles.input}`}
-                    type='search'>
-                </input>
-                <img src={location} />
+            {/*<div  className={styles.inputSearch}>*/}
+            <Input
+                placeholder="جستجوی..."
+                className={styles.inputContainer}
+                // className={`sub-headline ${styles.input}`}
+                type='search'>
+                <img src={search} alt="search"/>
+                <img src={location} alt="location"/>
+            </Input>
 
-            </div>
+
+            {/*</div>*/}
             <div className={styles.savedLocations}>
                 <div className={styles.savedLocation}>
                     {/*<img src={star} />*/}
@@ -27,7 +30,7 @@ const LocationBar = () => {
 
                 </div>
             </div>
-            <Button type="filled" className={styles.acpButton}>
+            <Button type="filled" className={styles.bottomSheetButton}>
                 <span className="button2">تایید مبدا</span>
             </Button>
         </div>

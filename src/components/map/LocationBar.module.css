@@ -1,67 +1,22 @@
-.LocationBar {
-    border-radius: var(--border-radius-1);
-    height: 270px;
-    width: 100%;
-    position: absolute;
-    bottom: -1rem;
-    background-color: var(--color-secondary-white);
-    display: flex;
-    flex-direction: column;
-    /* align-items: center; */
-    padding: 21px 24px 23px 24px;
-
-}
-
-.icon {
-    /* padding-top: 21px; */
-    width: 92px;
-    margin: 0 auto;
-}
-
-.inputSearch {
-    /* border: 1px solid var(--color-tertiary-light-active); */
-    border-radius: var(--border-radius-1);
-    color: var(--color-tertiary-darker);
-    padding: 16px 24px;
-    background-color: var(--color-tertiary-white-normal);
-    margin-top: 20px;
-    display: flex;
-    align-items: center;
-    width: 100%;
-}
-
-.LocationBar input {
-    outline: none;
-    border: none;
-    background-color: var(--color-tertiary-white-normal);
-    width: 100%;
-}
-.input {
-    /* height: 30px; */
-    width: 100%;
-    padding: 0 1rem;
-}
-
-.LocationBar input:focus {
-    outline: none;
-}
 
 .LocationBar span {
     margin-right: 8px;
-}
-
-.acpButton {
-    width: 100%;
 }
 
 .savedLocation {
     display: flex;
     align-items: center;
     margin-left: 24px;
-
 }
 
 .savedLocations {
-    margin: 12px 0;
+    margin: 16px 0;
     display: flex;
+}
+
+.bottomSheetButton{
+    width: 100%;
+}
+.inputContainer {
+    width: 100%;
 }
