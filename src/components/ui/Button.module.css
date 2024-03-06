@@ -27,6 +27,11 @@
     color: var(--color-primary-normal);
 }
 
+.btn.text {
+    padding: 16px 0 0 0;
+    color: var(--color-primary-normal);
+}
+
 .btn.outline {
     border: 1px solid var(--color-primary-normal);
     color: var(--color-primary-normal);

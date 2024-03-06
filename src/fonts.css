@@ -71,10 +71,12 @@ h6 {
 
 .sub-headline {
     font-size: 18px;
+    color: var(--color-tertiary-dark);
 }
 
 .headline {
     font-size: 20px;
+    color: var(--color-tertiary-darker);
 }
 
 .callout {

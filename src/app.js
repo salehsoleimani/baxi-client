@@ -8,11 +8,14 @@ import Maps from "./components/map/Map";
 import ProfilePage from "./pages/ProfilePage";
 import MapPage from "./pages/MapPage";
 import AddressPage from "./pages/AddressPage";
+import NoNetworkModal from "./components/modals/NoNetworkModal";
 
 const App = () => {
     const [phoneNumber, setPhoneNumber] = useState("");
 
     return (
+        <NoNetworkModal>
+
         <AuthProvider>
             <BrowserRouter>
                 <Routes>
@@ -49,6 +52,7 @@ const App = () => {
                 </Routes>
             </BrowserRouter>
         </AuthProvider>
+        </NoNetworkModal>
     );
 };
 

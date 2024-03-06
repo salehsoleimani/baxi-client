@@ -11,16 +11,16 @@ const Input = ({
                    disabled,
                }) => {
     return (
-        <input
-            id={id}
-            name={name}
-            onChange={onChange}
-            disabled={disabled}
-            className={`sub-headline  ${styles.input} ${className}`}
-            defaultValue={defaultValue}
-            placeholder={placeholder}
-            type={type}
-        />
+            <input
+                id={id}
+                name={name}
+                onChange={onChange}
+                disabled={disabled}
+                className={`sub-headline  ${styles.input} ${className}`}
+                defaultValue={defaultValue}
+                placeholder={placeholder}
+                type={type}
+            />
     );
 };
 
