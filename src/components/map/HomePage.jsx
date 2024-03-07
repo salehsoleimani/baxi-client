@@ -13,23 +13,29 @@ import NeshanMap from "@neshan-maps-platform/react-openlayers"
 const Maps = () => {
     const [open, setOpen] = useState(true);
     const neshanToken = 'web.11c86d9ad4654f708f74425d9a297b9f';
+
     const mapRef = useRef(null)
 
-    const [ol, setOl] = useState()
-    const [olMap, setOlMap] = useState()
-    const onInit = (ol, map) => {
-        setOl(ol)
-        setOlMap(map)
+    const onInit = (map) => {
+        map.setMapType("osm-bright")
+        // map.switchTrafficLayer(true)
     }
+
+    useEffect(() => {
+        if (mapRef.current?.map) {
+            mapRef.current?.map.switchTrafficLayer(true)
+            mapRef.current?.map.setMapType("standard-night")
+        }
+    }, [])
+
     return <div>
         <NeshanMap
-            ref={mapRef}
-            onInit={onInit}
+            className={styles.map}
             mapKey={neshanToken}
             defaultType="neshan"
-            center={{latitude: 35.7665394, longitude: 51.4749824}}
-            style={{height: "100vh", width: "100%"}}
-            zoom={15}
+            center={{latitude:34.7983, longitude: 48.5148}}
+            onInit={onInit}
+            zoom={16}
             traffic={true}
             poi={false}
         ></NeshanMap>
