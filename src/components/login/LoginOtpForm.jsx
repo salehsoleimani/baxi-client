@@ -41,7 +41,6 @@ const LoginOtpForm = ({phoneNumber}) => {
             console.log(err);
             const status_code = err.response?.status
             if (status_code === 400) return setError("به تازگی درخواست کد فعالسازی فرستاده‌اید، تا یک دقیقه دیگر مجددا امتحان کنید");
-            else if (!status_code)  return setError("اتصال خود به اینترنت را بررسی کنید");
             navigate('/login', {state: {from: location, status_code: status_code}, replace: true});
         });
     }, [location, phoneNumber]);
