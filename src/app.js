@@ -1,4 +1,4 @@
-import {Route, Routes} from "react-router-dom";
+import {Route, Routes,BrowserRouter} from "react-router-dom";
 import LoginPage from "./pages/LoginPage";
 import LoginForm from "./components/login/LoginForm";
 import LoginOtpForm from "./components/login/LoginOtpForm";
@@ -17,42 +17,42 @@ const App = () => {
 
         <NoNetworkModal>
 
-        <AuthProvider>
-            <BrowserRouter>
-                <Routes>
-                    <Route path="/" element={<MapPage/>}>
-                        <Route index element={<Maps/>}/>
-                        <Route path="profile" element={<ProfilePage/>}/>
-                        <Route path="address" element={<AddressPage/>}/>
-                        <Route path='login' element={<LoginPage/>}>
-                            <Route
-                                index
-                                element={<LoginForm
-                                    phoneNumber={phoneNumber}
-                                    setPhoneNumber={setPhoneNumber}/>}
-                            />
-                            <Route
-                                path="otp"
-                                element={<LoginOtpForm
-                                    phoneNumber={phoneNumber}/>}
-                            />
+            <AuthProvider>
+                <BrowserRouter>
+                    <Routes>
+                        <Route path="/" element={<MapPage/>}>
+                            <Route index element={<Maps/>}/>
+                            <Route path="profile" element={<ProfilePage/>}/>
+                            <Route path="address" element={<AddressPage/>}/>
+                            <Route path='login' element={<LoginPage/>}>
+                                <Route
+                                    index
+                                    element={<LoginForm
+                                        phoneNumber={phoneNumber}
+                                        setPhoneNumber={setPhoneNumber}/>}
+                                />
+                                <Route
+                                    path="otp"
+                                    element={<LoginOtpForm
+                                        phoneNumber={phoneNumber}/>}
+                                />
+                            </Route>
                         </Route>
-                    </Route>
-                    {/*<Route*/}
-                    {/*    path="complete_profile"*/}
-                    {/*    element={<CompleteProfilePage/>}>*/}
-                    {/*    <Route*/}
-                    {/*        index*/}
-                    {/*        element={<EnterName/>}*/}
-                    {/*    />*/}
-                    {/*    <Route*/}
-                    {/*        path="email"*/}
-                    {/*        element={<EnterEmail/>}*/}
-                    {/*    />*/}
-                    {/*</Route>*/}
-                </Routes>
-            </BrowserRouter>
-        </AuthProvider>
+                        {/*<Route*/}
+                        {/*    path="complete_profile"*/}
+                        {/*    element={<CompleteProfilePage/>}>*/}
+                        {/*    <Route*/}
+                        {/*        index*/}
+                        {/*        element={<EnterName/>}*/}
+                        {/*    />*/}
+                        {/*    <Route*/}
+                        {/*        path="email"*/}
+                        {/*        element={<EnterEmail/>}*/}
+                        {/*    />*/}
+                        {/*</Route>*/}
+                    </Routes>
+                </BrowserRouter>
+            </AuthProvider>
         </NoNetworkModal>
     );
 };

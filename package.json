@@ -6,8 +6,6 @@
     "@emotion/react": "^11.11.4",
     "@emotion/styled": "^11.11.0",
     "@mui/joy": "^5.0.0-beta.29",
-    "@neshan-maps-platform/mapbox-gl": "^1.1.1",
-    "@neshan-maps-platform/mapbox-gl-react": "^1.0.0",
     "@neshan-maps-platform/ol": "^1.0.5",
     "@neshan-maps-platform/react-openlayers": "^3.0.1",
     "@testing-library/jest-dom": "^5.17.0",
