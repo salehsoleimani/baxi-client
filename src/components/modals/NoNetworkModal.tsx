@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import {BottomSheet} from "react-spring-bottom-sheet";
-import SheetContent from "../ui/SheetContent.jsx";
+import SheetContent from "../ui/SheetContent.tsx";
 import Button from "../ui/Button";
 import noNetworkImg from '../../assets/img/no_network.png'
 import styles from './NoNetworkModal.css'
