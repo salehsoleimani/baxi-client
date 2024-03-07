@@ -1,29 +1,22 @@
-import React, {useEffect, useRef, useState} from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import styles from './HomePage.module.css';
-import {BottomSheet} from 'react-spring-bottom-sheet';
+import { BottomSheet } from 'react-spring-bottom-sheet';
 import 'react-spring-bottom-sheet/dist/style.css';
 import Button from '../ui/Button';
 import Input from '../ui/Input';
 import search from '../../assets/icons/search-normal.svg';
 import location from '../../assets/icons/location.svg';
 import NeshanMap from "@neshan-maps-platform/react-openlayers"
-import * as layer from '@neshan-maps-platform/ol/layer'
-import * as source from '@neshan-maps-platform/ol/source'
-import {Feature as getOverlay, Feature} from "@neshan-maps-platform/ol";
-import {fromLonLat, toLonLat} from "@neshan-maps-platform/ol/proj";
-import {Point} from "@neshan-maps-platform/ol/geom";
-import {defaults, Draw, Modify, Pointer, Select, Snap} from "@neshan-maps-platform/ol/interaction";
-import {Icon, Style, Image, IconImage, Fill} from "@neshan-maps-platform/ol/style";
+import { Feature } from "@neshan-maps-platform/ol";
+import { fromLonLat } from "@neshan-maps-platform/ol/proj";
+import { Point } from "@neshan-maps-platform/ol/geom";
+import { defaults, Draw, Modify, Snap } from "@neshan-maps-platform/ol/interaction";
+import { Icon, Style } from "@neshan-maps-platform/ol/style";
 import SheetContent from "../ui/SheetContent.tsx";
 import orgMarker from "../../assets/icons/marker_org.svg";
 import destMarker from "../../assets/icons/marker_des.svg";
-// import {renderFeature} from "@neshan-maps-platform/ol/renderer/vector";
-import * as circleFeature from "@neshan-maps-platform/ol/proj/projections";
-import {renderFeature} from "@neshan-maps-platform/ol/renderer/vector";
 import VectorLayer from "@neshan-maps-platform/ol/layer/Vector";
-import {Vector} from "@neshan-maps-platform/ol/source";
-// import {Vector as VectorSource} from "@neshan-maps-platform/ol/source";
-// import {renderFeature} from "@neshan-maps-platform/ol/renderer/canvas/VectorLayer"
+import { Vector } from "@neshan-maps-platform/ol/source";
 
 const HomePage = () => {
     const [open, setOpen] = useState(true);
@@ -33,12 +26,12 @@ const HomePage = () => {
     const [clickCount, setClickCount] = useState(0);
     const [inputValue, setInputValue] = useState('');
     const [buttonText, setButtonText] = useState('تایید مبدا');
-    const mapRef = useRef(null)
-
+    const mapRef = useRef(null);
 
     const onInit = (map) => {
         const newMarker = new Feature({
-            geometry: new Point(fromLonLat([48.5148, 34.7983])), name: 'userLocation',
+            geometry: new Point(fromLonLat([48.5148, 34.7983])),
+            name: 'userLocation',
         });
 
         newMarker.setStyle(new Style({
@@ -56,9 +49,9 @@ const HomePage = () => {
             })
         });
 
-        const dest_source = new Vector();
-        const dest_vector = new VectorLayer({
-            source: dest_source, style: new Style({
+        const destSource = new Vector();
+        const destVector = new VectorLayer({
+            source: destSource, style: new Style({
                 image: new Icon({
                     anchor: [.75, 1], scale: 2, src: destMarker
                 }), fill: '#000000',
@@ -66,7 +59,7 @@ const HomePage = () => {
         });
 
         map.addLayer(vector);
-        map.addLayer(dest_vector);
+        map.addLayer(destVector);
 
         const modify = new Modify({
             source: source, style: new Style({
@@ -77,15 +70,14 @@ const HomePage = () => {
         });
         map.addInteraction(modify);
 
-
-        const modify_dest = new Modify({
-            source: dest_source, style: new Style({
+        const modifyDest = new Modify({
+            source: destSource, style: new Style({
                 image: new Icon({
                     anchor: [.75, 1], scale: 2, src: destMarker
                 }),
             }), pixelTolerance: 40
         });
-        map.addInteraction(modify_dest);
+        map.addInteraction(modifyDest);
 
         function addInteractions() {
             const draw = new Draw({
@@ -97,14 +89,12 @@ const HomePage = () => {
             });
             draw.on('drawstart', function () {
             });
-            draw.on('drawend', async function (event) {
+            draw.on('drawend', function (event) {
                 if (clickCount === 0) {
-                    console.log(event)
                     setOrg(event.feature.getGeometry().getCoordinates());
-                    alert(org)
                     map.removeInteraction(draw);
                     const newDraw = new Draw({
-                        source: dest_source, type: "Point", style: new Style({
+                        source: destSource, type: "Point", style: new Style({
                             image: new Icon({
                                 anchor: [.75, 1], scale: 2, src: destMarker
                             }),
@@ -112,12 +102,9 @@ const HomePage = () => {
                     });
                     newDraw.on('drawstart', function () {
                     });
-                    newDraw.on('drawend', async function (event) {
+                    newDraw.on('drawend', function (event) {
                         setDest(event.feature.getGeometry().getCoordinates());
                         map.removeInteraction(newDraw);
-                        console.log(dest)
-                        const destAddress = await fetchAddress(dest);
-                        setInputValue(destAddress);
                     });
                     map.addInteraction(newDraw);
                     setClickCount(1);
@@ -125,17 +112,14 @@ const HomePage = () => {
                     setDest(event.feature.getGeometry().getCoordinates());
                     map.removeInteraction(draw);
                 }
-                console.log(org)
-                const orgAddress = await fetchAddress(org);
-                setInputValue(orgAddress);
             });
 
             map.addInteraction(draw);
-            const snap = new Snap({source: source});
+            const snap = new Snap({ source: source });
             map.addInteraction(snap);
 
-            const dest_snap = new Snap({source: dest_source});
-            map.addInteraction(dest_snap);
+            const destSnap = new Snap({ source: destSource });
+            map.addInteraction(destSnap);
         }
 
         addInteractions();
@@ -143,13 +127,11 @@ const HomePage = () => {
 
     const handleClick = async () => {
         if (clickCount === 1) {
-            // Fetch address for org location
             const orgAddress = await fetchAddress(org);
             setInputValue(orgAddress);
             setButtonText('انتخاب مقصد');
             setClickCount(1);
         } else if (clickCount === 2) {
-            // Fetch address for dest location
             const destAddress = await fetchAddress(dest);
             setInputValue(destAddress);
             setButtonText('');
@@ -158,7 +140,6 @@ const HomePage = () => {
     };
 
     const fetchAddress = async (coordinates) => {
-        console.log(coordinates[1])
         const serviceToken = "service.56044bc8cffe4511b9742d9fbaa00da9"
         const url = `https://api.neshan.org/v1/reverse?lat=${coordinates[1]}&lng=${coordinates[0]}`;
         const response = await fetch(url, {
@@ -167,7 +148,7 @@ const HomePage = () => {
             }
         });
         const data = await response.json();
-        return data.formatted_address;
+        return data.address;
     };
 
     useEffect(() => {
@@ -176,47 +157,49 @@ const HomePage = () => {
         }
     }, []);
 
-    return (<div>
-        <NeshanMap
-            className={styles.map}
-            mapKey={neshanToken}
-            defaultType="dreamy-gold"
-            center={{latitude: 34.7983, longitude: 48.5148}}
-            onInit={onInit}
-            zoom={16}
-            traffic={true}
-            poi={false}
-        ></NeshanMap>
-        <BottomSheet
-            open={open}
-            blocking={false}
-            expandOnContentDrag={true}
-            snapPoints={({minHeight}) => minHeight}
-        >
-            <SheetContent className={styles.LocationBar}>
-                <Input
-                    placeholder="جستجوی..."
-                    className={styles.inputContainer}
-                    type="search"
-                    value={inputValue}
-                >
-                    <img src={search} alt="search"/>
-                    <img src={location} alt="location"/>
-                </Input>
-                <div className={styles.savedLocations}>
-                    <div className={styles.savedLocation}>
-                        <span>خونه</span>
+    return (
+        <div>
+            <NeshanMap
+                className={styles.map}
+                mapKey={neshanToken}
+                defaultType="dreamy-gold"
+                center={{ latitude: 34.7983, longitude: 48.5148 }}
+                onInit={onInit}
+                zoom={16}
+                traffic={true}
+                poi={false}
+            ></NeshanMap>
+            <BottomSheet
+                open={open}
+                blocking={false}
+                expandOnContentDrag={true}
+                snapPoints={({ minHeight }) => minHeight}
+            >
+                <SheetContent className={styles.LocationBar}>
+                    <Input
+                        placeholder="جستجوی..."
+                        className={styles.inputContainer}
+                        type="search"
+                        value={inputValue}
+                    >
+                        <img src={search} alt="search" />
+                        <img src={location} alt="location" />
+                    </Input>
+                    <div className={styles.savedLocations}>
+                        <div className={styles.savedLocation}>
+                            <span>خونه</span>
+                        </div>
+                        <div className={styles.savedLocation}>
+                            <span>خونه</span>
+                        </div>
                     </div>
-                    <div className={styles.savedLocation}>
-                        <span>خونه</span>
-                    </div>
-                </div>
-                {buttonText && (<Button type="filled" className={styles.bottomSheetButton} onClick={handleClick}>
-                    <span className="button">{buttonText}</span>
-                </Button>)}
-            </SheetContent>
-        </BottomSheet>
-    </div>);
+                    {buttonText && (<Button type="filled" className={styles.bottomSheetButton} onClick={handleClick}>
+                        <span className="button">{buttonText}</span>
+                    </Button>)}
+                </SheetContent>
+            </BottomSheet>
+        </div>
+    );
 };
 
 export default HomePage;
