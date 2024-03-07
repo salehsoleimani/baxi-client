@@ -3,7 +3,6 @@ import styles from './HomePage.module.css'
 import {BottomSheet} from 'react-spring-bottom-sheet'
 import 'react-spring-bottom-sheet/dist/style.css'
 import {useState} from "react";
-import SheetContent from "../ui/SheetContent.tsx";
 import Button from "../ui/Button";
 import Input from "../ui/Input";
 import search from "../../assets/icons/search-normal.svg";

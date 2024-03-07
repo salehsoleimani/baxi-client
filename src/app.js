@@ -8,7 +8,7 @@ import Maps from "./components/map/HomePage";
 import ProfilePage from "./pages/ProfilePage";
 import MapPage from "./pages/MapPage";
 import AddressPage from "./pages/AddressPage";
-import NoNetworkModal from "./components/modals/NoNetworkModal";
+import NoNetworkModal from "./components/modals/NoNetworkModal.tsx";
 
 const App = () => {
     const [phoneNumber, setPhoneNumber] = useState("");
