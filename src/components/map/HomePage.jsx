@@ -1,22 +1,22 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, {useEffect, useRef, useState} from 'react';
 import styles from './HomePage.module.css';
-import { BottomSheet } from 'react-spring-bottom-sheet';
+import {BottomSheet} from 'react-spring-bottom-sheet';
 import 'react-spring-bottom-sheet/dist/style.css';
 import Button from '../ui/Button';
 import Input from '../ui/Input';
 import search from '../../assets/icons/search-normal.svg';
 import location from '../../assets/icons/location.svg';
 import NeshanMap from "@neshan-maps-platform/react-openlayers"
-import { Feature } from "@neshan-maps-platform/ol";
-import { fromLonLat } from "@neshan-maps-platform/ol/proj";
-import { Point } from "@neshan-maps-platform/ol/geom";
-import { defaults, Draw, Modify, Snap } from "@neshan-maps-platform/ol/interaction";
-import { Icon, Style } from "@neshan-maps-platform/ol/style";
+import {Feature} from "@neshan-maps-platform/ol";
+import {fromLonLat, toLonLat} from "@neshan-maps-platform/ol/proj";
+import {Point} from "@neshan-maps-platform/ol/geom";
+import {defaults, Draw, Modify, Snap} from "@neshan-maps-platform/ol/interaction";
+import {Icon, Style} from "@neshan-maps-platform/ol/style";
 import SheetContent from "../ui/SheetContent.tsx";
 import orgMarker from "../../assets/icons/marker_org.svg";
 import destMarker from "../../assets/icons/marker_des.svg";
 import VectorLayer from "@neshan-maps-platform/ol/layer/Vector";
-import { Vector } from "@neshan-maps-platform/ol/source";
+import {Vector} from "@neshan-maps-platform/ol/source";
 
 const HomePage = () => {
     const [open, setOpen] = useState(true);
@@ -90,8 +90,10 @@ const HomePage = () => {
             draw.on('drawstart', function () {
             });
             draw.on('drawend', function (event) {
+                const point = event.feature.getGeometry().getCoordinates()
+                const point_in_lang = toLonLat(point);
                 if (clickCount === 0) {
-                    setOrg(event.feature.getGeometry().getCoordinates());
+                    setOrg(point_in_lang);
                     map.removeInteraction(draw);
                     const newDraw = new Draw({
                         source: destSource, type: "Point", style: new Style({
@@ -103,11 +105,13 @@ const HomePage = () => {
                     newDraw.on('drawstart', function () {
                     });
                     newDraw.on('drawend', function (event) {
-                        setDest(event.feature.getGeometry().getCoordinates());
+                        const point = event.feature.getGeometry().getCoordinates()
+                        const point_in_lang = toLonLat(point);
+                        setDest(point_in_lang);
                         map.removeInteraction(newDraw);
                     });
                     map.addInteraction(newDraw);
-                    setClickCount(1);
+                    // setClickCount(1);
                 } else if (clickCount === 1) {
                     setDest(event.feature.getGeometry().getCoordinates());
                     map.removeInteraction(draw);
@@ -115,10 +119,10 @@ const HomePage = () => {
             });
 
             map.addInteraction(draw);
-            const snap = new Snap({ source: source });
+            const snap = new Snap({source: source});
             map.addInteraction(snap);
 
-            const destSnap = new Snap({ source: destSource });
+            const destSnap = new Snap({source: destSource});
             map.addInteraction(destSnap);
         }
 
@@ -126,12 +130,12 @@ const HomePage = () => {
     };
 
     const handleClick = async () => {
-        if (clickCount === 1) {
+        if (clickCount === 0) {
             const orgAddress = await fetchAddress(org);
             setInputValue(orgAddress);
             setButtonText('انتخاب مقصد');
             setClickCount(1);
-        } else if (clickCount === 2) {
+        } else if (clickCount === 1) {
             const destAddress = await fetchAddress(dest);
             setInputValue(destAddress);
             setButtonText('');
@@ -140,6 +144,7 @@ const HomePage = () => {
     };
 
     const fetchAddress = async (coordinates) => {
+        console.log(coordinates)
         const serviceToken = "service.56044bc8cffe4511b9742d9fbaa00da9"
         const url = `https://api.neshan.org/v1/reverse?lat=${coordinates[1]}&lng=${coordinates[0]}`;
         const response = await fetch(url, {
@@ -163,7 +168,7 @@ const HomePage = () => {
                 className={styles.map}
                 mapKey={neshanToken}
                 defaultType="dreamy-gold"
-                center={{ latitude: 34.7983, longitude: 48.5148 }}
+                center={{latitude: 34.7983, longitude: 48.5148}}
                 onInit={onInit}
                 zoom={16}
                 traffic={true}
@@ -173,17 +178,17 @@ const HomePage = () => {
                 open={open}
                 blocking={false}
                 expandOnContentDrag={true}
-                snapPoints={({ minHeight }) => minHeight}
+                snapPoints={({minHeight}) => minHeight}
             >
                 <SheetContent className={styles.LocationBar}>
                     <Input
                         placeholder="جستجوی..."
                         className={styles.inputContainer}
                         type="search"
-                        value={inputValue}
+                        defaultValue={inputValue}
                     >
-                        <img src={search} alt="search" />
-                        <img src={location} alt="location" />
+                        <img src={search} alt="search"/>
+                        <img src={location} alt="location"/>
                     </Input>
                     <div className={styles.savedLocations}>
                         <div className={styles.savedLocation}>
