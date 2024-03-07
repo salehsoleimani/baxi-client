@@ -26,6 +26,7 @@ const LoginPage = () => {
 
 
   return (isLoading ? <Loading/> : <Outlet/>);
+
 };
 
 export default LoginPage;

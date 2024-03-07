@@ -1,4 +1,4 @@
-import {BrowserRouter, Route, Routes} from "react-router-dom";
+import {Route, Routes} from "react-router-dom";
 import LoginPage from "./pages/LoginPage";
 import LoginForm from "./components/login/LoginForm";
 import LoginOtpForm from "./components/login/LoginOtpForm";
@@ -14,6 +14,7 @@ const App = () => {
     const [phoneNumber, setPhoneNumber] = useState("");
 
     return (
+
         <NoNetworkModal>
 
         <AuthProvider>
