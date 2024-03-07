@@ -23,6 +23,7 @@
     "react-scripts": "5.0.1",
     "react-spring": "^9.7.3",
     "react-spring-bottom-sheet": "^3.4.1",
+    "typescript": "^3.9.10",
     "web-vitals": "^2.1.4"
   },
   "scripts": {
