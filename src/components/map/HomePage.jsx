@@ -8,6 +8,8 @@ import Input from "../ui/Input";
 import search from "../../assets/icons/search-normal.svg";
 import location from "../../assets/icons/location.svg";
 import NeshanMap from "@neshan-maps-platform/react-openlayers"
+import SheetContent from "../ui/SheetContent.tsx";
+
 
 const Maps = () => {
     const [open, setOpen] = useState(true);
@@ -16,14 +18,14 @@ const Maps = () => {
     const mapRef = useRef(null)
 
     const onInit = (map) => {
-        map.setMapType("osm-bright")
+        // map.setMapType("osm-bright")
         // map.switchTrafficLayer(true)
     }
 
     useEffect(() => {
         if (mapRef.current?.map) {
-            mapRef.current?.map.switchTrafficLayer(true)
-            mapRef.current?.map.setMapType("standard-night")
+            // mapRef.current?.map.switchTrafficLayer(true)
+            // mapRef.current?.map.setMapType("standard-night")
         }
     }, [])
 
@@ -31,7 +33,7 @@ const Maps = () => {
         <NeshanMap
             className={styles.map}
             mapKey={neshanToken}
-            defaultType="neshan"
+            defaultType="dreamy-gold"
             center={{latitude:34.7983, longitude: 48.5148}}
             onInit={onInit}
             zoom={16}
