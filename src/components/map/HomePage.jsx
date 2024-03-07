@@ -1,8 +1,7 @@
-import React, {useEffect, useRef} from 'react';
+import React, {useEffect, useRef, useState} from 'react';
 import styles from './HomePage.module.css';
 import {BottomSheet} from 'react-spring-bottom-sheet';
 import 'react-spring-bottom-sheet/dist/style.css';
-import {useState} from 'react';
 import Button from '../ui/Button';
 import Input from '../ui/Input';
 import search from '../../assets/icons/search-normal.svg';
@@ -11,12 +10,13 @@ import NeshanMap from "@neshan-maps-platform/react-openlayers"
 import * as layer from '@neshan-maps-platform/ol/layer'
 import * as source from '@neshan-maps-platform/ol/source'
 import {Feature as getOverlay, Feature} from "@neshan-maps-platform/ol";
-import {fromLonLat} from "@neshan-maps-platform/ol/proj";
+import {fromLonLat, toLonLat} from "@neshan-maps-platform/ol/proj";
 import {Point} from "@neshan-maps-platform/ol/geom";
 import {defaults, Draw, Modify, Pointer, Select, Snap} from "@neshan-maps-platform/ol/interaction";
 import {Icon, Style, Image, IconImage, Fill} from "@neshan-maps-platform/ol/style";
 import SheetContent from "../ui/SheetContent.tsx";
-import orgMarker from "../../assets/icons/marker_org.svg"
+import orgMarker from "../../assets/icons/marker_org.svg";
+import destMarker from "../../assets/icons/marker_des.svg";
 // import {renderFeature} from "@neshan-maps-platform/ol/renderer/vector";
 import * as circleFeature from "@neshan-maps-platform/ol/proj/projections";
 import {renderFeature} from "@neshan-maps-platform/ol/renderer/vector";
@@ -28,8 +28,13 @@ import {Vector} from "@neshan-maps-platform/ol/source";
 const HomePage = () => {
     const [open, setOpen] = useState(true);
     const neshanToken = 'web.11c86d9ad4654f708f74425d9a297b9f';
-
+    const [org, setOrg] = useState(null);
+    const [dest, setDest] = useState(null);
+    const [clickCount, setClickCount] = useState(0);
+    const [inputValue, setInputValue] = useState('');
+    const [buttonText, setButtonText] = useState('تایید مبدا');
     const mapRef = useRef(null)
+
 
     const onInit = (map) => {
         const newMarker = new Feature({
@@ -43,110 +48,131 @@ const HomePage = () => {
         }));
 
         const source = new Vector();
-        // var vectorSource = new source.Vector({
-        // features: [newMarker]
-        // });
         const vector = new VectorLayer({
-            source: source,
+            source: source, style: new Style({
+                image: new Icon({
+                    anchor: [.75, 1], scale: 2, src: orgMarker
+                }), fill: '#000000',
+            })
+        });
 
-            style: new Style({
+        const dest_source = new Vector();
+        const dest_vector = new VectorLayer({
+            source: dest_source, style: new Style({
+                image: new Icon({
+                    anchor: [.75, 1], scale: 2, src: destMarker
+                }), fill: '#000000',
+            })
+        });
+
+        map.addLayer(vector);
+        map.addLayer(dest_vector);
+
+        const modify = new Modify({
+            source: source, style: new Style({
                 image: new Icon({
                     anchor: [.75, 1], scale: 2, src: orgMarker
                 }),
-
-                fill: '#000000',
-            })
-
-        })
-
-
-        map.addLayer(vector);
-
-        const modify = new Modify({source: source});
+            }), pixelTolerance: 40
+        });
         map.addInteraction(modify);
 
+
+        const modify_dest = new Modify({
+            source: dest_source, style: new Style({
+                image: new Icon({
+                    anchor: [.75, 1], scale: 2, src: destMarker
+                }),
+            }), pixelTolerance: 40
+        });
+        map.addInteraction(modify_dest);
+
         function addInteractions() {
-            var defaultEditStyle = new getOverlay().getStyleFunction();
-            var drawing = false
             const draw = new Draw({
-                source: source,
-                type: "Point",
-                style:
-                    new Style({
-                        image: new Icon({
-                            anchor: [.75, 1], scale: 2, src: orgMarker
-                        }),
-                    })
+                source: source, type: "Point", style: new Style({
+                    image: new Icon({
+                        anchor: [.75, 1], scale: 2, src: orgMarker
+                    }),
+                })
             });
             draw.on('drawstart', function () {
-                drawing = true;
             });
-            draw.on('drawend', function () {
-                drawing = false;
+            draw.on('drawend', async function (event) {
+                if (clickCount === 0) {
+                    console.log(event)
+                    setOrg(event.feature.getGeometry().getCoordinates());
+                    alert(org)
+                    map.removeInteraction(draw);
+                    const newDraw = new Draw({
+                        source: dest_source, type: "Point", style: new Style({
+                            image: new Icon({
+                                anchor: [.75, 1], scale: 2, src: destMarker
+                            }),
+                        })
+                    });
+                    newDraw.on('drawstart', function () {
+                    });
+                    newDraw.on('drawend', async function (event) {
+                        setDest(event.feature.getGeometry().getCoordinates());
+                        map.removeInteraction(newDraw);
+                        console.log(dest)
+                        const destAddress = await fetchAddress(dest);
+                        setInputValue(destAddress);
+                    });
+                    map.addInteraction(newDraw);
+                    setClickCount(1);
+                } else if (clickCount === 1) {
+                    setDest(event.feature.getGeometry().getCoordinates());
+                    map.removeInteraction(draw);
+                }
+                console.log(org)
+                const orgAddress = await fetchAddress(org);
+                setInputValue(orgAddress);
             });
+
             map.addInteraction(draw);
             const snap = new Snap({source: source});
             map.addInteraction(snap);
+
+            const dest_snap = new Snap({source: dest_source});
+            map.addInteraction(dest_snap);
         }
 
         addInteractions();
+    };
 
+    const handleClick = async () => {
+        if (clickCount === 1) {
+            // Fetch address for org location
+            const orgAddress = await fetchAddress(org);
+            setInputValue(orgAddress);
+            setButtonText('انتخاب مقصد');
+            setClickCount(1);
+        } else if (clickCount === 2) {
+            // Fetch address for dest location
+            const destAddress = await fetchAddress(dest);
+            setInputValue(destAddress);
+            setButtonText('');
+            setClickCount(0);
+        }
+    };
 
-        // const pointerInteraction = new Pointer({
-        //     handleDownEvent: function (evt) {
-        //         console.log('down');
-        //         var layerFilter = function (layer) {
-        //             return layer === newMarker;
-        //         }
-        //
-        //         const feature = map.forEachFeatureAtPixel(evt.pixel, function (feature) {
-        //             return feature;
-        //         }, this, layerFilter, this);
-        //         if (feature === newMarker) {
-        //             this.feature = feature;
-        //             this.coordinate = evt.coordinate;
-        //         }
-        //         return !!feature;
-        //     }, handleDragEvent: function (evt) {
-        //         console.log('drag');
-        //
-        //         if (this.feature) {
-        //             const deltaX = evt.coordinate[0] - this.coordinate[0];
-        //             const deltaY = evt.coordinate[1] - this.coordinate[1];
-        //             const geometry = this.feature.getGeometry();
-        //             geometry.translate(deltaX, deltaY);
-        //             this.coordinate = evt.coordinate;
-        //         }
-        //     }, handleUpEvent: function () {
-        //         console.log('up');
-        //
-        //         this.feature = null;
-        //         return false;
-        //     },
-        // });
-
-
-        // const draw = new Draw({
-        //     style: new Style({
-        //         image: new Icon({
-        //             anchor: [.75, 1], scale: 2, src: orgMarker
-        //         }),
-        //         fill: new Icon({
-        //             anchor: [.75, 1], scale: 2, src: orgMarker
-        //         }),
-        //     }),
-        //     // source: vectorSource,
-        //     type: "Point",
-        // });
-
-
-        // map.addInteraction(draw)
-    }
+    const fetchAddress = async (coordinates) => {
+        console.log(coordinates[1])
+        const serviceToken = "service.56044bc8cffe4511b9742d9fbaa00da9"
+        const url = `https://api.neshan.org/v1/reverse?lat=${coordinates[1]}&lng=${coordinates[0]}`;
+        const response = await fetch(url, {
+            headers: {
+                'Api-Key': serviceToken
+            }
+        });
+        const data = await response.json();
+        return data.formatted_address;
+    };
 
     useEffect(() => {
         if (mapRef.current?.map) {
-            // mapRef.current?.map.switchTrafficLayer(true)
-            // mapRef.current?.map.setMapType("standard-night")
+            // Additional map initialization if needed
         }
     }, []);
 
@@ -172,6 +198,7 @@ const HomePage = () => {
                     placeholder="جستجوی..."
                     className={styles.inputContainer}
                     type="search"
+                    value={inputValue}
                 >
                     <img src={search} alt="search"/>
                     <img src={location} alt="location"/>
@@ -184,9 +211,9 @@ const HomePage = () => {
                         <span>خونه</span>
                     </div>
                 </div>
-                <Button type="filled" className={styles.bottomSheetButton}>
-                    <span className="button2">تایید مبدا</span>
-                </Button>
+                {buttonText && (<Button type="filled" className={styles.bottomSheetButton} onClick={handleClick}>
+                    <span className="button">{buttonText}</span>
+                </Button>)}
             </SheetContent>
         </BottomSheet>
     </div>);
