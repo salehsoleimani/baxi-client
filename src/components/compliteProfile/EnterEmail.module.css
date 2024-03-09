@@ -1,0 +1,83 @@
+.EnterEmail {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    width: 100%;
+    height: 100vh;
+    padding: 72px 24px 24px 24px;
+}
+
+.icon {
+    width: 52px;
+}
+
+.header{
+    display: flex;
+    justify-content: space-between;
+
+}
+
+.arrow{
+    width: 32px;
+    height: 32px;
+}
+
+.title{
+    margin-top: 16px;
+    margin-bottom: 8px;
+}
+
+.subHeadLine {
+    color: var(--color-tertiary-dark);
+    margin-bottom: 24px;
+}
+
+.inputField {
+    margin-bottom: 16px;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.inputField input {
+    padding-right: 16px;
+}
+
+
+.EnterEmail Button {
+    /* border-radius: var(--border-radius-2); */
+}
+
+.button{
+    /* margin-block: 24px; */
+    width: 212px;
+    /* position: absolute;
+    bottom: 24px; */
+}
+
+.LaterButton{
+    width: 112px;
+    height: 64px;
+    outline: none;
+    border: none;
+    background-color: transparent;
+    border-radius: var(--border-radius-1);
+    padding: 16px 24px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    -webkit-tap-highlight-color: transparent;
+    color: var(--color-primary-normal);
+    background-color: var(--color-primary-white-light);
+    margin-right: 16px;
+}
+
+.buttonsHolder{
+    display: flex;
+    position: absolute;
+    bottom: 24px;
+}
+
