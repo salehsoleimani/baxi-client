@@ -4,7 +4,7 @@
     justify-content: flex-start;
     width: 100%;
     height: 100vh;
-    padding: 72px 24px 24px 24px;
+    padding: 72px 24px 0 24px;
 }
 
 .icon {
@@ -48,7 +48,7 @@
     margin-block: 24px;
     width: 90%;
     position: absolute;
-    bottom: 24px;
+    bottom: 0px;
 }
 
 .button img{

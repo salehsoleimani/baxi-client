@@ -45,39 +45,21 @@
 }
 
 
-.EnterEmail Button {
-    /* border-radius: var(--border-radius-2); */
-}
-
-.button{
-    /* margin-block: 24px; */
-    width: 212px;
-    /* position: absolute;
-    bottom: 24px; */
-}
-
-.LaterButton{
-    width: 112px;
-    height: 64px;
-    outline: none;
-    border: none;
-    background-color: transparent;
-    border-radius: var(--border-radius-1);
-    padding: 16px 24px;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 8px;
-    -webkit-tap-highlight-color: transparent;
-    color: var(--color-primary-normal);
-    background-color: var(--color-primary-white-light);
-    margin-right: 16px;
-}
-
 .buttonsHolder{
     display: flex;
     position: absolute;
     bottom: 24px;
+    width: 89%;
 }
+.buttonNext {
+    flex-grow: 2;
+    margin-left: 4px;
+}
+
+.buttonLater{
+    flex-grow: 1;
+    margin-right: 4px;
+
+}
+
 

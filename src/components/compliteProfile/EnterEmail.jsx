@@ -1,12 +1,12 @@
 
-// import Notification from "../../assets/glass-icons/Notification.png";
+import Notification from "../../assets/glass-icons/notification.png";
 import styles from "./EnterEmail.module.css";
-// import arrowLeft from "../../assets/glass-icons/arrow-left.png";
+import arrowLeft from "../../assets/icons/arrow-left.svg";
 import { useNavigate } from "react-router-dom";
 import Input from "../ui/Input";
 import Button from "../ui/Button";
 
-// import arrowRight from '../../assets/icons/arrow-right.svg'
+import arrowRight from '../../assets/icons/arrow-right.svg'
 import { useState } from "react";
 
 const EnterEmail = () => {
@@ -18,7 +18,7 @@ const EnterEmail = () => {
 
     return (
         <div className={styles.EnterEmail}>
-            {/* <div className={styles.header}>
+            <div className={styles.header}>
                 <img src={Notification} className={styles.icon} />
                 <img src={arrowLeft} className={styles.arrow} onClick={() => navigat(-1)} />
             </div>
@@ -36,13 +36,17 @@ const EnterEmail = () => {
                     className={styles.inputField}
                 />
                 <div className={styles.buttonsHolder}>
-                    <Button type="filled" className={styles.button} onClick={() => navigat('email')}>
+                    <Button type="filled" className={styles.buttonNext} onClick={() => navigat('email')}>
                         <img src={arrowRight} alt="arrow icon" />
                         <span className="button">ادامه</span>
                     </Button>
-                    <button className={`button ${styles.LaterButton}`}>بعدا</button>
-                </div> */}
-            {/* </form> */}
+                    <Button type="tonal" className={styles.buttonLater} onClick={() => navigat('email')}>
+                        {/* <img src={arrowRight} alt="arrow icon" /> */}
+                        <span className="button">بعدا</span>
+                    </Button>
+                    {/* <button className={`button ${styles.LaterButton}`}>بعدا</button> */}
+                </div>
+            </form>
         </div>
     );
 };
