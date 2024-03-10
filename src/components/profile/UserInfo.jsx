@@ -23,7 +23,6 @@ const UserInfo = () => {
       <div>
         <div className={styles.box}>
           <Icon src={wallet} backgroundColor={'#FFF6F3'} />
-
           <div className={styles.boxInfo}>
             <div>
               <p className="headline">کیف پول</p>

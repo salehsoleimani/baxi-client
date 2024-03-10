@@ -13,10 +13,7 @@ const FirstAddress = () => {
         <img src={addImg} />
         <div className="sub-headline">هنوز آدرس منتخبی ذخیره نکرده اید</div>
       </div>
-      {/* <button className={`button2 ${styles.bottom}`}>
-        <span>ذخیره آدرس جدید</span>
-      </button> */}
-      <Button type="border" className={styles.button}>
+      <Button type="text" className={styles.button}>
         <img src={add} />
         <span>ذخیره آدرس جدید</span>
       </Button>
