@@ -13,7 +13,7 @@
     -  **Map View:** We used OpenLayers Map and to be honest it was such a low-level library that we had to define and implement each interaction with user touch or mouse cursor change events, for the location picker from the experience users have from other e-taxi services we had to implement each interaction and listen to event listeners to change the location and modification of the marker.
 
 
-<img src="./README_assets/prototype_mobile.png">   <img src="./README_assets/design_system.png">   <img src="./README_assets/map.png">
+<img src="./prototype_mobile.png">   <img src="./design_system.png">   <img src="./map.png">
 
 ## How to Run Docker
 To get Baxi up and running in a docker container, follow these steps:
