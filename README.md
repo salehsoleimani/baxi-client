@@ -1,70 +1,30 @@
-# Getting Started with Create React App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# Frontend
 
-## Available Scripts
+- **Authentication Provider:** a provider for authentication required routes from react-router, storing and accessing auth tokens safe, easy, flexible, and secure
+- **Private Axios Hook:** an instance of Axios for sending API requests to authentication-required endpoints wrapping the requests in secure cookies and sending the credentials:
+    -  **Request Interceptor:** Using request interceptors we simplified our work in working with sending auth-required requests and including credentials just once and using it everywhere:)
+    -  **Response Interceptor:** Using response interceptors we minified our work in working with auth-required routes, and pages and accessing tokens easily
 
-In the project directory, you can run:
+- **Design System and Components:** Implementing our UI Design, We Started with designing Our Design System based on atomic design (regarding Brad Frost) and making our process of developing front-end, changing or editing UI components or logic later on, easier and more integrated code. Our Design system is not complete yet but it does have a good start.
+    -  **Buttons:** We have `primary` `secondary` `tonal` `outline` `text` buttons as an example with one single component, a typography system, and a responsive grid.
+    -  **Inputs:** We applied padding, spacing, typeface, corner radius, and several states of inputs into our input component simplifying our job
+    -  **Modal Providers:** We needed to show models such as no network modal anywhere inside our application, so we used react context API and simply wrapped our application and routers inside it
+    -  **Map View:** We used OpenLayers Map and to be honest it was such a low-level library that we had to define and implement each interaction with user touch or mouse cursor change events, for the location picker from the experience users have from other e-taxi services we had to implement each interaction and listen to event listeners to change the location and modification of the marker.
 
-### `npm start`
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+<img src="./README_assets/prototype_mobile.png">   <img src="./README_assets/design_system.png">   <img src="./README_assets/map.png">
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## How to Run Docker
+To get Baxi up and running in a docker container, follow these steps:
 
-### `npm test`
+1. **Clone the Repository:** `git clone https://github.com/salehsoleimani/baxi-client`
+2. **Build the Docker Image:** `Make build`
+3. **Run the Docker Container:** `Make run`
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## How to Run in Local
+To get Baxi up and running in your local environment, follow these steps:
 
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+1. **Clone the Repository:** `git clone https://github.com/salehsoleimani/baxi-client`
+8. **Install the packages:** `npm install`
+9. **Run or Build the Client Server:** `npm start`
