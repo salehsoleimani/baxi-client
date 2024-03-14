@@ -1,97 +1,97 @@
 .btn {
-    outline: none;
-    border: none;
-    background-color: transparent;
-    border-radius: var(--border-radius-1);
-    padding: 16px 24px;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 8px;
-    -webkit-tap-highlight-color: transparent;
-    /*transition: 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);*/
+  outline: none;
+  border: none;
+  background-color: transparent;
+  border-radius: var(--border-radius-1);
+  padding: 16px 24px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  -webkit-tap-highlight-color: transparent;
+  /*transition: 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);*/
 }
 
-.btn img{
-    width: 24px;
+.btn img {
+  width: 24px;
 }
 
 .btn.filled {
-    background-color: var(--color-primary-normal);
-    color: #fff;
+  background-color: var(--color-primary-normal);
+  color: #fff;
 }
 
 .btn.tonal {
-    background-color: var(--color-primary-light);
-    color: var(--color-primary-normal);
+  background-color: var(--color-primary-light);
+  color: var(--color-primary-normal);
 }
 
 .btn.text {
-    padding: 16px 0 0 0;
-    color: var(--color-primary-normal);
+  background-color: #e6f8ff;
+  color: #068cbf;
+  padding: 16px 24px;
+  border-radius: var(--border-radius-2);
 }
 
 .btn.outline {
-    border: 1px solid var(--color-primary-normal);
-    color: var(--color-primary-normal);
+  border: 1px solid var(--color-primary-normal);
+  color: var(--color-primary-normal);
 }
 
 .btn.border {
-    border: 1px solid var(--color-tertiary-lighter);
-    color: var(--color-primary-normal);
+  border: 1px solid var(--color-tertiary-lighter);
+  color: var(--color-primary-normal);
 }
 
 .btn.callout {
-    background-color: var(--color-tertiary-white-normal);
-    color: var(--color-tertiary-darker);
+  background-color: var(--color-tertiary-white-normal);
+  color: var(--color-tertiary-darker);
 }
 
-
 .btn.filled:disabled {
-    background-color: var(--color-primary-lighter);
-    color: #fff;
+  background-color: var(--color-primary-lighter);
+  color: #fff;
 }
 
 .btn.tonal:disabled {
-    background-color: var(--color-primary-white-light);
-    color: var(--color-primary-lighter);
+  background-color: var(--color-primary-white-light);
+  color: var(--color-primary-lighter);
 }
 
 .btn.outline:disabled {
-    border: 1px solid var(--color-primary-lighter);
-    color: var(--color-primary-lighter);
+  border: 1px solid var(--color-primary-lighter);
+  color: var(--color-primary-lighter);
 }
 
 .btn.border:disabled {
-    border: 1px solid var(--color-tertiary-light);
-    color: var(--color-primary-lighter);
+  border: 1px solid var(--color-tertiary-light);
+  color: var(--color-primary-lighter);
 }
 
 .btn.callout:disabled {
-    background-color: var(--color-tertiary-white-normal);
-    color: var(--color-tertiary-normal);
+  background-color: var(--color-tertiary-white-normal);
+  color: var(--color-tertiary-normal);
 }
 
-
 .btn.filled:hover {
-    background-color: var(--color-primary-light-hover);
-    color: #fff;
+  background-color: var(--color-primary-light-hover);
+  color: #fff;
 }
 
 .btn.tonal:hover {
-    background-color: var(--color-primary-white-light-hover);
-    color: var(--color-primary-light-hover);
+  background-color: var(--color-primary-white-light-hover);
+  color: var(--color-primary-light-hover);
 }
 
 .btn.outline:hover {
-    border: 1px solid var(--color-primary-lighter);
-    color: var(--color-primary-lighter);
+  border: 1px solid var(--color-primary-lighter);
+  color: var(--color-primary-lighter);
 }
 
 .btn.border:hover {
-    border: 1px solid var(--color-tertiary-light-hover);
-    color: var(--color-primary-lighter);
+  border: 1px solid var(--color-tertiary-light-hover);
+  color: var(--color-primary-lighter);
 }
 
 /*.btn.callout:hover {*/
@@ -99,30 +99,29 @@
 /*    color: var(--color-tertiary-darker);*/
 /*}*/
 
-
 .btn.filled:focus {
-    background-color: var(--color-primary-light-active);
-    color: #fff;
+  background-color: var(--color-primary-light-active);
+  color: #fff;
 }
 
 .btn.tonal:focus {
-    background-color: var(--color-primary-white-light-active);
-    color: var(--color-primary-light-active);
+  background-color: var(--color-primary-white-light-active);
+  color: var(--color-primary-light-active);
 }
 
 .btn.outline:focus {
-    border: 1px solid var(--color-primary-light-active);
-    color: var(--color-primary-light-active);
+  border: 1px solid var(--color-primary-light-active);
+  color: var(--color-primary-light-active);
 }
 
 .btn.border:focus {
-    border: 1px solid var(--color-tertiary-light-active);
-    color: var(--color-primary-light-active);
+  border: 1px solid var(--color-tertiary-light-active);
+  color: var(--color-primary-light-active);
 }
 
 .btn.callout:focus {
-    background-color: var(--color-tertiary-white-normal-active);
-    color: var(--color-tertiary-darker);
+  background-color: var(--color-tertiary-white-normal-active);
+  color: var(--color-tertiary-darker);
 }
 
 /*.btn:global(:disabled) {*/

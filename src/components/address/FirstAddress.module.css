@@ -19,26 +19,21 @@
 
 .addImg {
   margin: 83px auto 0;
+  display: grid;
+  align-items: center;
 }
 
 .addImg img {
   width: 218px;
   height: 212px;
+  margin: auto;
 }
 
-.bottom {
-  border: none;
-  background-color: #e6f8ff;
-  color: #068cbf;
-  padding: 16px 24px;
-  border-radius: var(--border-radius-2);
-  align-items: center;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 200px;
-  margin: 16px auto;
+.button {
+  margin: auto;
+  margin-top: 16px;
+
 }
-.bottom img {
+.button img {
   margin-left: 10px;
 }

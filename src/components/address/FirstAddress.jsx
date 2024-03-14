@@ -1,7 +1,8 @@
 import styles from "./FirstAddress.module.css";
-import rightArrow from "../../assets/glass-icons/arrow-right.svg";
-import addImg from "../../assets/icons/address_empty_state.svg";
+import rightArrow from "../../assets/icons/arrow-right.svg";
+import addImg from "../../assets/img/addImg.png";
 import add from "../../assets/icons/add.svg";
+import Button from "../ui/Button";
 
 const FirstAddress = () => {
   return (
@@ -10,12 +11,12 @@ const FirstAddress = () => {
       <p className={`title2`}>آدرس های منتخب</p>
       <div className={styles.addImg}>
         <img src={addImg} />
-        <div className="body">هنوز آدرس منتخبی ذخیره نکرده اید</div>
+        <div className="sub-headline">هنوز آدرس منتخبی ذخیره نکرده اید</div>
       </div>
-      <button className={`button2 ${styles.bottom}`}>
+      <Button type="text" className={styles.button}>
         <img src={add} />
         <span>ذخیره آدرس جدید</span>
-      </button>
+      </Button>
     </div>
   );
 };

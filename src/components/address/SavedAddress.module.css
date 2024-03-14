@@ -1,0 +1,16 @@
+
+
+.box {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 16px;
+    align-items: center;
+  }
+  .boxInfo {
+    display: flex;
+    justify-content: space-between;
+    border-bottom: solid 1px var(--color-tertiary-light-active);
+    width: 100%;
+    padding-bottom: 16px;
+  }
+  
